@@ -1,6 +1,6 @@
 const Hero = () => {
   return (
-    <section className="relative bg-[url(http://localhost:3000/assets/images/banner/B10.jpg)] bg-cover bg-center bg-no-repeat  ">
+    <section className="relative bg-[url(/assets/images/banner/B10.jpg)] bg-cover bg-center bg-no-repeat  ">
       <div className="absolute inset-0 ltr:sm:bg-gradient-to-r rtl:sm:bg-gradient-to-l bg-gradient-to-b from-Terracotta/50 to-CoffeeBrown/50 opacity-75"></div>
 
       <div className="relative mx-auto max-w-screen-xl px-4 py-32 sm:px-6 lg:flex lg:h-screen lg:items-center lg:px-8">
