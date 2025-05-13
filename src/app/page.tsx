@@ -1,7 +1,12 @@
+"use client";
+
 import Hero from "@/components/Hero";
 import NewProducts from "@/components/NewProducts";
 import Subs from "@/components/Subs";
 import Testimonial from "@/components/Testimonial";
+import { getAllProducts } from "@/lib/api/product";
+import { Product } from "@/types/product";
+import { useEffect, useState } from "react";
 
 const cproducts = [
   {
@@ -84,7 +89,20 @@ const sproducts = [
   },
 ];
 
-const page = () => {
+const Page = () => {
+  const [products, setProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    getAllProducts()
+      .then((data) => {
+        setProducts(data.products);
+        console.log("product data", products);
+        // Removed redundant logging of products to avoid dependency issues
+      })
+      // Removed redundant logging of products to avoid dependency issues
+      .catch((err) => console.error(err.message));
+  }, []); // Dependency array remains empty to avoid infinite loop
+
   return (
     <div>
       {/* <BannersTwo
@@ -102,4 +120,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
