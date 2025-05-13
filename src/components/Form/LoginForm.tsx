@@ -26,7 +26,7 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="bg-no-repeat bg-cover bg-center relative bg-[url(/assets/images/banner/B10.jpg)]">
+    <div className="bg-no-repeat bg-cover bg-center relative bg-[url(assets/images/banner/B10.jpg)]">
       <div className="absolute bg-gradient-to-b from-Terracotta/50 to-CoffeeBrown/50 opacity-75 inset-0 z-0"></div>
       <div className="min-h-screen sm:flex sm:flex-row mx-0 justify-center">
         <div className="flex-col flex self-center p-10 sm:max-w-5xl xl:max-w-2xl z-10">
