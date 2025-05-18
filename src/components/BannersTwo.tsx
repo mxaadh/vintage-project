@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const BannersTwo = () => {
   return (
-    <section className="overflow-hidden bg-[url(http://localhost:3000/assets/images/banner/b4.jpg)] bg-cover bg-top bg-no-repeat">
+    <section className="overflow-hidden bg-[url(/assets/images/banner/b4.jpg)] bg-cover bg-top bg-no-repeat">
       <div className="bg-black/50 p-8 md:p-12 lg:px-16 lg:py-24">
         <div className="text-center ltr:sm:text-left rtl:sm:text-right">
           <h1 className="text-3xl font-extrabold text-white sm:text-5xl">

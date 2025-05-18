@@ -106,7 +106,7 @@ const Page = () => {
   return (
     <div>
       {/* <BannersTwo
-        imageURL={"http://localhost:3000/assets/images/banner/b4.jpg"}
+        imageURL={"/assets/images/banner/b4.jpg"}
       /> */}
       <Hero />
       <NewProducts title={"Creative"} products={cproducts} />
