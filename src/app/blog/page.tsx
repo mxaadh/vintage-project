@@ -12,19 +12,31 @@ const Blog = () => {
           <div className="col-span-2">
             {/* Blog Start */}
             <div className="w-[820px] h-[794px] relative">
-              <div className="left-[3px] top-[556px] absolute text-black text-3xl font-medium font-['Poppins']">
-                Going all-in with millennial design
+              <div className="left-[3px] top-[556px] absolute text-CoffeeBrown text-3xl font-medium font-['Poppins']">
+                Less is Truly More in Modern Design
               </div>
-              <div className="w-[817px] left-[3px] top-[613px] absolute text-justify text-[#9f9f9f] text-[15px] font-normal font-['Poppins'] leading-snug">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Mus
-                mauris vitae ultricies leo integer malesuada nunc. In nulla
-                posuere sollicitudin aliquam ultrices. Morbi blandit cursus
-                risus at ultrices mi tempus imperdiet. Libero enim sed faucibus
-                turpis in. Cursus mattis molestie a iaculis at erat. Nibh cras
-                pulvinar mattis nunc sed blandit libero. Pellentesque elit
-                ullamcorper dignissim cras tincidunt. Pharetra et ultrices neque
-                ornare aenean euismod elementum.
+              <div className="w-[817px] left-[3px] top-[613px] absolute text-justify text-Terracotta text-[15px] font-normal font-['Poppins'] leading-snug">
+                In today's fast-paced world, a sense of calm and clarity is
+                increasingly valued. This translates beautifully into the realm
+                of design, where minimalism has taken center stage. Far from
+                being stark or empty, minimalist design embraces simplicity,
+                clean lines, and a focus on functionality. It's about
+                intentionally stripping away the unnecessary to highlight the
+                beauty of essential elements. Think of a thoughtfully curated
+                space with a few impactful pieces, or a website with intuitive
+                navigation and ample white space. This approach not only creates
+                a visually appealing aesthetic but also promotes a sense of
+                peace and focus.
+                <div className="w-10 h-12 mt-8 top-100 ml-[480px]">
+                  <Link
+                    href={`#`}
+                    className="w-[245px] h-12 left-0 top-0 absolute bg-WarmWhite border border-AntiqueGold"
+                  >
+                    <div className="left-[82px] top-[12px] absolute text-AntiqueGold text-base font-semibold font-['Poppins'] leading-normal">
+                      Show More
+                    </div>
+                  </Link>
+                </div>
               </div>
               <Image
                 className="w-[817px] h-[500px] left-[3px] top-0 absolute rounded-[10px]"
@@ -35,47 +47,40 @@ const Blog = () => {
               />
               <div className="w-[349px] h-6 left-0 top-[517px] absolute">
                 <div className="w-20 h-6 left-0 top-0 absolute">
-                  <div className="left-[27px] top-0 absolute text-[#9f9f9f] text-base font-normal font-['Poppins']">
+                  <div className="left-[27px] top-0 absolute text-Terracotta text-base font-normal font-['Poppins']">
                     Admin
                   </div>
                   <div className="w-5 h-5 left-0 top-[2px] absolute flex-col justify-start items-start inline-flex overflow-hidden" />
                 </div>
                 <div className="w-[78px] h-6 left-[271px] top-0 absolute">
-                  <div className="left-[31px] top-0 absolute text-[#9f9f9f] text-base font-normal font-['Poppins']">
+                  <div className="left-[31px] top-0 absolute text-Terracotta text-base font-normal font-['Poppins']">
                     Wood
                   </div>
                   <div className="w-6 h-6 left-0 top-0 absolute flex-col justify-start items-start inline-flex overflow-hidden" />
                 </div>
                 <div className="w-[121px] h-6 left-[115px] top-0 absolute">
-                  <div className="left-[31px] top-0 absolute text-[#9f9f9f] text-base font-normal font-['Poppins']">
+                  <div className="left-[31px] top-0 absolute text-Terracotta text-base font-normal font-['Poppins']">
                     14 Oct 2022
                   </div>
                   <div className="w-5 h-5 left-0 top-0 absolute flex-col justify-start items-start inline-flex overflow-hidden" />
                 </div>
               </div>
-              <div className="w-[89px] h-9 left-[3px] top-[758px] absolute">
-                <div className="left-0 top-0 absolute text-justify text-black text-base font-normal font-['Poppins']">
-                  Read more
-                </div>
-                <div className="w-[77px] h-[0px] left-[6px] top-[36px] absolute border border-black"></div>
-              </div>
             </div>
             {/* Blog End */}
             {/* Blog Start */}
             <div className="w-[820px] h-[794px] relative">
-              <div className="left-[3px] top-[556px] absolute text-black text-3xl font-medium font-['Poppins']">
-                Going all-in with millennial design
+              <div className="left-[3px] top-[556px] absolute text-CoffeeBrown text-3xl font-medium font-['Poppins']">
+                Connecting with Nature Indoors
               </div>
-              <div className="w-[817px] left-[3px] top-[613px] absolute text-justify text-[#9f9f9f] text-[15px] font-normal font-['Poppins'] leading-snug">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Mus
-                mauris vitae ultricies leo integer malesuada nunc. In nulla
-                posuere sollicitudin aliquam ultrices. Morbi blandit cursus
-                risus at ultrices mi tempus imperdiet. Libero enim sed faucibus
-                turpis in. Cursus mattis molestie a iaculis at erat. Nibh cras
-                pulvinar mattis nunc sed blandit libero. Pellentesque elit
-                ullamcorper dignissim cras tincidunt. Pharetra et ultrices neque
-                ornare aenean euismod elementum.
+              <div className="w-[817px] left-[3px] top-[613px] absolute text-justify text-Terracotta text-[15px] font-normal font-['Poppins'] leading-snug">
+                Humans have an innate connection to nature, and biophilic design
+                seeks to bring the outdoors in. This trend is gaining
+                significant traction as we recognize the positive impact of
+                natural elements on our well-being. Incorporating natural light,
+                ventilation, plants, and organic materials like wood and stone
+                can transform a space into a more calming and inspiring
+                environment. Imagine a workspace filled with lush greenery, or a
+                living room with large windows showcasing natural views.
               </div>
               <Image
                 className="w-[817px] h-[500px] left-[3px] top-0 absolute rounded-[10px]"
@@ -86,19 +91,19 @@ const Blog = () => {
               />
               <div className="w-[349px] h-6 left-0 top-[517px] absolute">
                 <div className="w-20 h-6 left-0 top-0 absolute">
-                  <div className="left-[27px] top-0 absolute text-[#9f9f9f] text-base font-normal font-['Poppins']">
+                  <div className="left-[27px] top-0 absolute text-Terracotta text-base font-normal font-['Poppins']">
                     Admin
                   </div>
                   <div className="w-5 h-5 left-0 top-[2px] absolute flex-col justify-start items-start inline-flex overflow-hidden" />
                 </div>
                 <div className="w-[78px] h-6 left-[271px] top-0 absolute">
-                  <div className="left-[31px] top-0 absolute text-[#9f9f9f] text-base font-normal font-['Poppins']">
+                  <div className="left-[31px] top-0 absolute text-Terracotta text-base font-normal font-['Poppins']">
                     Wood
                   </div>
                   <div className="w-6 h-6 left-0 top-0 absolute flex-col justify-start items-start inline-flex overflow-hidden" />
                 </div>
                 <div className="w-[121px] h-6 left-[115px] top-0 absolute">
-                  <div className="left-[31px] top-0 absolute text-[#9f9f9f] text-base font-normal font-['Poppins']">
+                  <div className="left-[31px] top-0 absolute text-Terracotta text-base font-normal font-['Poppins']">
                     14 Oct 2022
                   </div>
                   <div className="w-5 h-5 left-0 top-0 absolute flex-col justify-start items-start inline-flex overflow-hidden" />
@@ -114,19 +119,19 @@ const Blog = () => {
             {/* Blog End */}
             {/* Blog Start */}
             <div className="w-[820px] h-[794px] relative">
-              <div className="left-[3px] top-[556px] absolute text-black text-3xl font-medium font-['Poppins']">
-                Going all-in with millennial design
+              <div className="left-[3px] top-[556px] absolute text-CoffeeBrown text-3xl font-medium font-['Poppins']">
+                Injecting Personality into Design
               </div>
-              <div className="w-[817px] left-[3px] top-[613px] absolute text-justify text-[#9f9f9f] text-[15px] font-normal font-['Poppins'] leading-snug">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Mus
-                mauris vitae ultricies leo integer malesuada nunc. In nulla
-                posuere sollicitudin aliquam ultrices. Morbi blandit cursus
-                risus at ultrices mi tempus imperdiet. Libero enim sed faucibus
-                turpis in. Cursus mattis molestie a iaculis at erat. Nibh cras
-                pulvinar mattis nunc sed blandit libero. Pellentesque elit
-                ullamcorper dignissim cras tincidunt. Pharetra et ultrices neque
-                ornare aenean euismod elementum.
+              <div className="w-[817px] left-[3px] top-[613px] absolute text-justify text-Terracotta text-[15px] font-normal font-['Poppins'] leading-snug">
+                While minimalism and natural elements are popular, there's also
+                a strong movement towards embracing individuality through bold
+                colors and playful patterns. Design is a powerful tool for
+                self-expression, and incorporating vibrant hues and interesting
+                motifs can inject energy and personality into any space or
+                visual. Think of unexpected color pairings in interior design,
+                or a website that uses dynamic patterns to create a memorable
+                user experience. This approach allows for creativity and can
+                evoke a sense of joy and excitement.
               </div>
               <Image
                 className="w-[817px] h-[500px] left-[3px] top-0 absolute rounded-[10px]"
@@ -137,19 +142,19 @@ const Blog = () => {
               />
               <div className="w-[349px] h-6 left-0 top-[517px] absolute">
                 <div className="w-20 h-6 left-0 top-0 absolute">
-                  <div className="left-[27px] top-0 absolute text-[#9f9f9f] text-base font-normal font-['Poppins']">
+                  <div className="left-[27px] top-0 absolute text-Terracotta text-base font-normal font-['Poppins']">
                     Admin
                   </div>
                   <div className="w-5 h-5 left-0 top-[2px] absolute flex-col justify-start items-start inline-flex overflow-hidden" />
                 </div>
                 <div className="w-[78px] h-6 left-[271px] top-0 absolute">
-                  <div className="left-[31px] top-0 absolute text-[#9f9f9f] text-base font-normal font-['Poppins']">
+                  <div className="left-[31px] top-0 absolute text-Terracotta text-base font-normal font-['Poppins']">
                     Wood
                   </div>
                   <div className="w-6 h-6 left-0 top-0 absolute flex-col justify-start items-start inline-flex overflow-hidden" />
                 </div>
                 <div className="w-[121px] h-6 left-[115px] top-0 absolute">
-                  <div className="left-[31px] top-0 absolute text-[#9f9f9f] text-base font-normal font-['Poppins']">
+                  <div className="left-[31px] top-0 absolute text-Terracotta text-base font-normal font-['Poppins']">
                     14 Oct 2022
                   </div>
                   <div className="w-5 h-5 left-0 top-0 absolute flex-col justify-start items-start inline-flex overflow-hidden" />
@@ -248,7 +253,7 @@ const Blog = () => {
                     <div className="w-[119px] left-0 top-0 absolute text-black text-sm font-normal font-['Poppins']">
                       Going all-in with millennial design
                     </div>
-                    <div className="w-[119px] left-0 top-[47px] absolute text-[#9f9f9f] text-xs font-normal font-['Poppins']">
+                    <div className="w-[119px] left-0 top-[47px] absolute text-Terracotta text-xs font-normal font-['Poppins']">
                       03 Aug 2022
                     </div>
                   </div>
@@ -265,7 +270,7 @@ const Blog = () => {
                     <div className="w-[149px] left-0 top-0 absolute text-black text-sm font-normal font-['Poppins']">
                       Exploring new ways of decorating
                     </div>
-                    <div className="w-[119px] left-0 top-[47px] absolute text-[#9f9f9f] text-xs font-normal font-['Poppins']">
+                    <div className="w-[119px] left-0 top-[47px] absolute text-Terracotta text-xs font-normal font-['Poppins']">
                       03 Aug 2022
                     </div>
                   </div>
@@ -282,7 +287,7 @@ const Blog = () => {
                     <div className="w-40 left-0 top-0 absolute text-black text-sm font-normal font-['Poppins']">
                       Handmade pieces that took time to make
                     </div>
-                    <div className="w-[119px] left-0 top-[47px] absolute text-[#9f9f9f] text-xs font-normal font-['Poppins']">
+                    <div className="w-[119px] left-0 top-[47px] absolute text-Terracotta text-xs font-normal font-['Poppins']">
                       03 Aug 2022
                     </div>
                   </div>
@@ -299,7 +304,7 @@ const Blog = () => {
                     <div className="w-[119px] left-0 top-0 absolute text-black text-sm font-normal font-['Poppins']">
                       Modern home in Milan
                     </div>
-                    <div className="w-[119px] left-0 top-[47px] absolute text-[#9f9f9f] text-xs font-normal font-['Poppins']">
+                    <div className="w-[119px] left-0 top-[47px] absolute text-Terracotta text-xs font-normal font-['Poppins']">
                       03 Aug 2022
                     </div>
                   </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import ProductItem from "./ProductItem";
+import Link from "next/link";
 
 type ListTitleProps = {
   title: string;
@@ -273,11 +274,14 @@ const NewProducts = ({ title, products }: NewProductsProps) => {
           })}
         </ul>
         <div className="relative w-10 h-12 mt-8  ml-[480px]">
-          <div className="w-[245px] h-12 left-0 top-0 absolute bg-WarmWhite border border-AntiqueGold">
+          <Link
+            href={`/${title.charAt(0).toLowerCase() + title.slice(1)}`}
+            className="w-[245px] h-12 left-0 top-0 absolute bg-WarmWhite border border-AntiqueGold"
+          >
             <div className="left-[82px] top-[12px] absolute text-AntiqueGold text-base font-semibold font-['Poppins'] leading-normal">
               Show More
             </div>
-          </div>
+          </Link>
         </div>
       </div>
     </section>
