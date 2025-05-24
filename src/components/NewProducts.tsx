@@ -5,7 +5,7 @@ type ListTitleProps = {
   title: string;
 };
 
-const ListTitle = ({ title } : ListTitleProps) => {
+const ListTitle = ({ title }: ListTitleProps) => {
   return (
     <div>
       <header className="">
@@ -255,7 +255,7 @@ type NewProductsProps = {
   products: Product[];
 };
 
-const NewProducts = ({ title, products } : NewProductsProps) => {
+const NewProducts = ({ title, products }: NewProductsProps) => {
   return (
     <section className="bg-WarmWhite">
       <div

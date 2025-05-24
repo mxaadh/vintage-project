@@ -14,11 +14,11 @@ const Hero = () => {
             style={{ marginLeft: "800px" }}
           >
             <div className="w-[559px] h-[127px] left-[2px] top-[28px] absolute text-CharcoalBlack text-[52px] font-bold font-['Poppins'] leading-[65px]">
-              Discover Our New Collection
+              Discover Timeless Vintage Treasures
             </div>
             <div className="w-[546px] h-[52px] left-[2px] top-[172px] absolute text-[#333333] text-lg font-medium font-['Poppins'] leading-normal">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
-              tellus, luctus nec ullamcorper mattis.
+              Explore our exclusive collection of handcrafted vintage pieces,
+              carefully curated to bring character and charm into your space.
             </div>
             <div className="h-[74px] px-[72px] py-[25px] left-0 top-[270px] absolute bg-Terracotta border-2 justify-start items-start gap-2.5 inline-flex">
               <div className="text-WarmWhite text-base font-bold font-['Poppins'] uppercase">

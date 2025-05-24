@@ -19,13 +19,7 @@ function AppLayout({ children }: { children: React.ReactNode }) {
 }
 
 function AdminLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <>
-      <h1>Admin</h1>
-      {children}
-      <h1>Admin</h1>
-    </>
-  );
+  return <>{children}</>;
 }
 
 export default function LayoutSelector({

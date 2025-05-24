@@ -127,8 +127,11 @@ const Footer = () => {
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4 lg:col-span-2">
             <div className="text-center sm:text-left">
               <p className="text-lg font-medium text-SoftCream">About Us</p>
-
-              <ul className="mt-8 space-y-4 text-sm">
+              <p className="pt-8 text-sm font-medium text-SoftCream">
+                VintageCurate is a boutique collection of curated, timeless home
+                décor and antique treasures.
+              </p>
+              {/* <ul className="mt-8 space-y-4 text-sm">
                 <li>
                   <a
                     className="text-SoftCream transition hover:text-BurnishedBronze"
@@ -165,7 +168,7 @@ const Footer = () => {
                     Careers{" "}
                   </a>
                 </li>
-              </ul>
+              </ul> */}
             </div>
 
             <div className="text-center sm:text-left">
@@ -225,7 +228,9 @@ const Footer = () => {
                       />
                     </svg>
 
-                    <span className="flex-1 text-SoftCream">john@doe.com</span>
+                    <span className="flex-1 text-SoftCream">
+                      info@vintagecurate.com
+                    </span>
                   </a>
                 </li>
 
@@ -249,7 +254,9 @@ const Footer = () => {
                       />
                     </svg>
 
-                    <span className="flex-1 text-SoftCream">0123456789</span>
+                    <span className="flex-1 text-SoftCream">
+                      +1 234-567-8910
+                    </span>
                   </a>
                 </li>
 
@@ -275,7 +282,7 @@ const Footer = () => {
                   </svg>
 
                   <address className="-mt-0.5 flex-1 not-italic text-SoftCream">
-                    213 Lane, London, United Kingdom
+                    231 Lake Drive, London, UK
                   </address>
                 </li>
               </ul>
