@@ -1,10 +1,21 @@
-import { Card } from "@/components/ui/card";
+import PageHeadingButtons from "@/components/PageheadingButton";
 
 const Create = () => {
+  async function onSubmit(data: any) {
+    try {
+      await createProduct(data);
+      // Handle success (redirect, show toast, etc.)
+    } catch (error) {
+      // Handle error
+    }
+  }
+
+  
   return (
-    <Card>
-      <h1>Create</h1>
-    </Card>
+    <>
+      <PageHeadingButtons heading={"Add New Product"} />
+      <ProductForm onSubmit={onSubmit} />
+    </>
   );
 };
 

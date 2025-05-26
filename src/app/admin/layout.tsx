@@ -12,7 +12,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <Card className="h-full w-full">
               <CardHeader>
                 <CardTitle>
-                  <SidebarTrigger /> Admin
+                  <SidebarTrigger /> Admin Panal
                 </CardTitle>
               </CardHeader>
               <CardContent>{children}</CardContent>

@@ -8,9 +8,13 @@ const Detail = () => {
         <div className="max-w-screen-xl px-4 mx-auto 2xl:px-0">
           <div className="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
             <div className="shrink-0 max-w-md lg:max-w-lg mx-auto">
+              <h1 className="text-[40px] font-semibold text-CoffeeBrown">
+                Light Blue/Teal Tufted Sofa
+              </h1>
               <Image
                 className="w-full"
-                src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front.svg"
+                src="/assets/images/funniture/P06.jpg"
+                // src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front.svg"
                 alt="iMac Front"
                 width={500}
                 height={500}
@@ -19,8 +23,7 @@ const Detail = () => {
 
             <div className="mt-6 sm:mt-8 lg:mt-0 bg-MutedSand p-10 rounded-2xl">
               <h1 className="text-xl font-semibold text-slate-950a sm:text-2xl">
-                Apple iMac 24 All-In-One Computer, Apple M1, 8GB RAM, 256GB SSD,
-                Mac OS, Pink
+                Bit Starting From
               </h1>
               <div className="mt-4 sm:items-center sm:gap-4 sm:flex">
                 <p className="text-2xl font-extrabold text-slate-950a sm:text-3xl">
@@ -59,7 +62,7 @@ const Detail = () => {
               </div>
 
               <div className="mt-6 sm:gap-4 sm:items-center sm:flex sm:mt-8">
-                <a
+                {/* <a
                   href="#"
                   title="Add to favorites"
                   className="flex items-center justify-center py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-100"
@@ -83,7 +86,7 @@ const Detail = () => {
                     />
                   </svg>
                   Add to favorites
-                </a>
+                </a> */}
 
                 <Button name={"Place a BIT"} />
               </div>
@@ -91,16 +94,15 @@ const Detail = () => {
               <hr className="my-6 md:my-8 border-gray-500" />
 
               <p className="mb-6 text-gray-600">
-                Studio quality three mic array for crystal clear calls and voice
-                recordings. Six-speaker sound system for a remarkably robust and
-                high-quality audio experience. Up to 256GB of ultrafast SSD
-                storage.
-              </p>
-
-              <p className="text-gray-600">
-                Two Thunderbolt USB 4 ports and up to two USB 3 ports. Ultrafast
-                Wi-Fi 6 and Bluetooth 5.0 wireless. Color matched Magic Mouse
-                with Magic Keyboard or Magic Keyboard with Touch ID.
+                This elegant light blue/teal sofa offers a harmonious blend of
+                classic design elements and a refreshing contemporary hue. The
+                soft, inviting upholstery in a serene shade of blue-green brings
+                a touch of tranquility and sophistication to any living space.
+                The meticulously crafted tufted back not only adds a visually
+                appealing texture and depth but also provides comfortable
+                support for lounging and relaxation. Each indentation in the
+                tufting is carefully placed, creating a diamond or square
+                pattern that speaks to the sofa's refined craftsmanship.
               </p>
             </div>
           </div>
@@ -260,14 +262,14 @@ const Detail = () => {
                 <Image
                   alt="ecommerce"
                   className="object-cover object-center w-full h-full block"
-                  src={"/assets/images/products/420.png"}
+                  src={"/assets/images/funniture/P06.jpg"}
                   width={420}
                   height={260}
                 />
               </a>
               <div className="mt-4">
                 <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
-                  CATEGORY
+                  FURNITURE
                 </h3>
                 <h2 className="text-gray-900 title-font text-lg font-medium">
                   The Catalyzer
