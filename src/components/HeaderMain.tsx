@@ -2,10 +2,14 @@ import React from "react";
 import { FaUser } from "react-icons/fa6";
 import { BsSearch } from "react-icons/bs";
 import { FaBagShopping } from "react-icons/fa6";
+import { TbLogout } from "react-icons/tb";
 import Logo from "./Logo";
 import Link from "next/link";
+import { useAuth } from "../context/AuthContext";
 
 const HeaderMain = () => {
+  const { auth, logout } = useAuth();
+
   return (
     <div className="bg-Terracotta border-b border-Terracotta bg-gradient-to-b from-MutedSand/30 to-Terracotta/25 py-4">
       <div className="container sm:flex justify-between items-center">
@@ -27,9 +31,18 @@ const HeaderMain = () => {
         </div>
 
         <div className="hidden lg:flex gap-4 text-WarmWhite text-[30px]">
-          <Link href="/login" className="hover:text-MutedSand">
-            <FaUser />
-          </Link>
+          {auth ? (
+            <button onClick={logout}>
+              <TbLogout />
+            </button>
+          ) : (
+            <>
+              <Link href="/login" className="hover:text-MutedSand">
+                <FaUser />
+              </Link>
+            </>
+          )}
+
           {/* <div className="relative">
             <FaHeart />
             <div className="bg-red-600 rounded-full absolute top-0 right-0 w-[18px] h-[18px] text-[12px] text-white grid place-items-center translate-x-1 -translate-y-1">

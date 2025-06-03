@@ -71,7 +71,7 @@ const SignupForm = () => {
     setIsSubmitting(true);
 
     try {
-      const payload = {
+      const payload: RegisterPayload = {
         first_name: formData.first_name,
         last_name: formData.last_name,
         email: formData.email,

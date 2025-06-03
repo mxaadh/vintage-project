@@ -102,7 +102,7 @@ const Detail = () => {
                 appealing texture and depth but also provides comfortable
                 support for lounging and relaxation. Each indentation in the
                 tufting is carefully placed, creating a diamond or square
-                pattern that speaks to the sofa's refined craftsmanship.
+                pattern that speaks to the sofas refined craftsmanship.
               </p>
             </div>
           </div>

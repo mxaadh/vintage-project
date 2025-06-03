@@ -16,11 +16,11 @@ const Blog = () => {
                 Less is Truly More in Modern Design
               </div>
               <div className="w-[817px] left-[3px] top-[613px] absolute text-justify text-Terracotta text-[15px] font-normal font-['Poppins'] leading-snug">
-                In today's fast-paced world, a sense of calm and clarity is
+                In todays fast-paced world, a sense of calm and clarity is
                 increasingly valued. This translates beautifully into the realm
                 of design, where minimalism has taken center stage. Far from
                 being stark or empty, minimalist design embraces simplicity,
-                clean lines, and a focus on functionality. It's about
+                clean lines, and a focus on functionality. Its about
                 intentionally stripping away the unnecessary to highlight the
                 beauty of essential elements. Think of a thoughtfully curated
                 space with a few impactful pieces, or a website with intuitive
@@ -123,8 +123,8 @@ const Blog = () => {
                 Injecting Personality into Design
               </div>
               <div className="w-[817px] left-[3px] top-[613px] absolute text-justify text-Terracotta text-[15px] font-normal font-['Poppins'] leading-snug">
-                While minimalism and natural elements are popular, there's also
-                a strong movement towards embracing individuality through bold
+                While minimalism and natural elements are popular, theres also a
+                strong movement towards embracing individuality through bold
                 colors and playful patterns. Design is a powerful tool for
                 self-expression, and incorporating vibrant hues and interesting
                 motifs can inject energy and personality into any space or

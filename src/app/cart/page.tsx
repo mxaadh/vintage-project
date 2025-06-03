@@ -1,5 +1,4 @@
 import BannerThree from "@/components/BannersThree";
-import Image from "next/image";
 
 const Cart = () => {
   return (
@@ -39,11 +38,6 @@ const Cart = () => {
                   <div className="w-[105px] h-[105px] left-[3px] top-0 absolute bg-[#b88e2f]/20 rounded-[10px]" />
                   <div className="w-[105px] h-[105px] left-0 top-0 absolute">
                     <div className="w-[105px] h-[105px] left-0 top-0 absolute bg-[#d9d9d9] rounded-[10px]" />
-                    <Image
-                      className="w-[111px] h-[90px] left-[-3px] top-[7px] absolute"
-                      src="https://via.placeholder.com/111x90"
-                      alt="Product Image"
-                    />
                   </div>
                 </div>
                 <div className="w-8 h-8 left-[515px] top-[132px] absolute">

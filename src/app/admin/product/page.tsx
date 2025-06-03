@@ -2,7 +2,7 @@
 
 import PageHeadingButtons from "@/components/PageheadingButton";
 import { Button } from "@/components/ui/button";
-import { Edit, Plus } from "lucide-react";
+import { Edit, Plus, Trash } from "lucide-react";
 import Link from "next/link";
 import {
   Table,
@@ -20,18 +20,40 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useEffect, useState } from "react";
-import { getAllProducts } from "@/lib/api/product";
+import { deleteProduct, getAllProducts } from "@/lib/api/product";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
 
 const Product = () => {
+  const { token } = useAuth();
+  const router = useRouter();
   const [products, setProducts] = useState([]);
+  const [submit, setSubmit] = useState(false);
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      const res = await getAllProducts();
-      setProducts(res.data);
-    };
     fetchProducts();
   }, []);
+
+  const fetchProducts = async () => {
+    const res = await getAllProducts();
+    setProducts(res.data);
+  };
+
+  const handleDelete = async (id: string) => {
+    setSubmit(true);
+
+    try {
+      await deleteProduct(id, token); // Make sure `token` is available from context
+      await fetchProducts();
+      console.log("Product deleted successfully");
+      // Optional: Show toast or redirect
+      router.push("/admin/product");
+    } catch (error: unknown) {
+      if (error instanceof Error) console.error(error.message);
+    } finally {
+      setSubmit(false);
+    }
+  };
 
   return (
     <>
@@ -79,25 +101,18 @@ const Product = () => {
                       </Link>
                     </Button> */}
                     <Button variant="ghost">
-                      <Link href={`/admin/product/${data._id}/edit`}>
+                      <Link href={`/admin/product/edit/${data._id}`}>
                         <Edit className={"text-yellow-800"} />
                       </Link>
                     </Button>
-                    {/* <form
-                      method="POST"
-                      action={`/bookings/${request._id}`}
-                      onSubmit={(e) => {
-                        e.preventDefault();
-                        if (confirm("Are you sure?")) {
-                          Inertia.delete(`/bookings/${request._id}`);
-                        }
-                      }}
-                      className="inline"
+                    <Button
+                      size={"icon"}
+                      variant="ghost"
+                      onClick={() => handleDelete(data._id)}
+                      disabled={submit}
                     >
-                      <Button size={"icon"} variant="ghost" type="submit">
-                        <Trash className={"text-red-800"} />
-                      </Button>
-                    </form> */}
+                      <Trash className={"text-red-800"} />
+                    </Button>
                   </TableCell>
                 </TableRow>
               ))}

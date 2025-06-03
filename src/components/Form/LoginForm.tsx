@@ -3,24 +3,84 @@
 import Link from "next/link";
 import { loginUser } from "@/lib/api/auth";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
 
 export default function LoginForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const { login } = useAuth();
+  const router = useRouter();
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    rememberMe: false,
+  });
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
+  const [apiError, setApiError] = useState("");
 
-  const handleLogin = async () => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, type, checked } = e.target;
+    setFormData({
+      ...formData,
+      [name]: type === "checkbox" ? checked : value,
+    });
+  };
+
+  const validateForm = () => {
+    const newErrors: Record<string, string> = {};
+
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = "Email is invalid";
+    }
+
+    if (!formData.password) {
+      newErrors.password = "Password is required";
+    } else if (formData.password.length < 8) {
+      newErrors.password = "Password must be at least 8 characters";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setApiError("");
+
+    if (!validateForm()) return;
+
     setLoading(true);
 
     try {
-      const data = await loginUser({ email, password });
+      const data = await loginUser({
+        email: formData.email,
+        password: formData.password,
+      });
+      const { user, token } = data;
+      login(user, token);
 
-      console.log("asdf Logged in user:", data.user);
-      console.log("asdf Token:", data.token);
-      setLoading(false);
-      // You can redirect or save token here
-    } catch (error) {
+      if (user.isAdmin) {
+        router.push("/admin");
+      } else {
+        router.back();
+      }
+    } catch (error: unknown) {
       console.error("Login error:", error);
+      let errorMessage = "Login failed. Please try again.";
+
+      if (error instanceof Error) {
+        try {
+          const errorObj = JSON.parse(error.message);
+          errorMessage = errorObj.message || errorMessage;
+        } catch {
+          errorMessage = error.message || errorMessage;
+        }
+      }
+
+      setApiError(errorMessage);
+    } finally {
       setLoading(false);
     }
   };
@@ -48,7 +108,13 @@ export default function LoginForm() {
               </h3>
             </div>
 
-            <div className="space-y-5">
+            {apiError && (
+              <div className="mb-4 p-2 bg-red-100 text-red-700 rounded">
+                {apiError}
+              </div>
+            )}
+
+            <form onSubmit={handleLogin} className="space-y-5">
               {/* Email Field */}
               <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-700 tracking-wide">
@@ -56,11 +122,19 @@ export default function LoginForm() {
                 </label>
                 <input
                   type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full text-base px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-AntiqueGold"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className={`w-full text-base px-4 py-2 border rounded-lg focus:outline-none ${
+                    errors.email
+                      ? "border-red-500"
+                      : "border-gray-300 focus:border-AntiqueGold"
+                  }`}
                   placeholder="mail@gmail.com"
                 />
+                {errors.email && (
+                  <p className="text-red-500 text-xs">{errors.email}</p>
+                )}
               </div>
 
               {/* Password Field */}
@@ -70,20 +144,30 @@ export default function LoginForm() {
                 </label>
                 <input
                   type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="w-full content-center text-base px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-AntiqueGold"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  className={`w-full content-center text-base px-4 py-2 border rounded-lg focus:outline-none ${
+                    errors.password
+                      ? "border-red-500"
+                      : "border-gray-300 focus:border-AntiqueGold"
+                  }`}
                   placeholder="Enter your password"
                 />
+                {errors.password && (
+                  <p className="text-red-500 text-xs">{errors.password}</p>
+                )}
               </div>
 
               {/* Remember me */}
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
                   <input
-                    id="remember_me"
-                    name="remember_me"
+                    id="rememberMe"
+                    name="rememberMe"
                     type="checkbox"
+                    checked={formData.rememberMe}
+                    onChange={handleChange}
                     className="h-4 w-4 bg-blue-500 focus:ring-blue-400 border-gray-300 rounded"
                   />
                   <label className="ml-2 block text-sm text-gray-800">
@@ -91,34 +175,37 @@ export default function LoginForm() {
                   </label>
                 </div>
                 <div className="text-sm">
-                  <a
-                    href="#"
+                  <Link
+                    href="/forgot-password"
                     className="text-Terracotta hover:text-AntiqueGold"
                   >
                     Forgot your password?
-                  </a>
+                  </Link>
                 </div>
               </div>
 
               {/* Submit Button */}
               <div>
                 <button
-                  onClick={handleLogin}
+                  type="submit"
                   disabled={loading}
-                  className={`w-full flex justify-center bg-Terracotta hover:bg-AntiqueGold text-gray-100 p-3 rounded-full tracking-wide font-semibold shadow-lg cursor-pointer transition ease-in duration-500
-    ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
+                  className={`w-full flex justify-center ${
+                    loading
+                      ? "bg-AntiqueGold"
+                      : "bg-Terracotta hover:bg-AntiqueGold"
+                  } text-MutedSand p-3 rounded-full tracking-wide font-semibold shadow-lg cursor-pointer transition ease-in duration-500`}
                 >
                   {loading ? "Signing in..." : "Sign in"}
                 </button>
               </div>
-            </div>
+            </form>
 
             <div className="pt-5 text-center text-gray-400 text-xs">
               <span>
                 Not registered?{" "}
                 <Link
                   href="/signup"
-                  className="text-green text-Terracotta hover:text-AntiqueGold"
+                  className="text-Terracotta hover:text-AntiqueGold"
                 >
                   Create an account.
                 </Link>

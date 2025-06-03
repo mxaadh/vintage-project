@@ -121,7 +121,7 @@ const Page = () => {
       })
       // Removed redundant logging of products to avoid dependency issues
       .catch((err) => console.error(err.message));
-  }, []); // Dependency array remains empty to avoid infinite loop
+  }, [products]); // Dependency array remains empty to avoid infinite loop
 
   return (
     <div>
