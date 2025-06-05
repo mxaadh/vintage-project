@@ -23,11 +23,13 @@ import { useEffect, useState } from "react";
 import { deleteProduct, getAllProducts } from "@/lib/api/product";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
+import { IProductResponse } from "@/types";
+import Image from "next/image";
 
 const Product = () => {
   const { token } = useAuth();
   const router = useRouter();
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<IProductResponse>();
   const [submit, setSubmit] = useState(false);
 
   useEffect(() => {
@@ -35,8 +37,8 @@ const Product = () => {
   }, []);
 
   const fetchProducts = async () => {
-    const res = await getAllProducts();
-    setProducts(res.data);
+    const res: IProductResponse = await getAllProducts();
+    setProducts(res);
   };
 
   const handleDelete = async (id: string) => {
@@ -45,7 +47,7 @@ const Product = () => {
     try {
       await deleteProduct(id, token); // Make sure `token` is available from context
       await fetchProducts();
-      console.log("Product deleted successfully");
+      alert("Product deleted successfully");
       // Optional: Show toast or redirect
       router.push("/admin/product");
     } catch (error: unknown) {
@@ -72,28 +74,41 @@ const Product = () => {
       <Card>
         <CardHeader>
           <CardTitle>All Products</CardTitle>
-          <CardDescription>{products.length || 0} results</CardDescription>
+          <CardDescription>
+            {products && (products.data?.length || 0)} results
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <Table>
             <TableHeader>
               <TableRow>
                 <TableHead>Title</TableHead>
+                <TableHead>Image</TableHead>
                 <TableHead>Description</TableHead>
                 <TableHead>Category</TableHead>
                 <TableHead>Price</TableHead>
-                <TableHead>Status</TableHead>
+                {/* <TableHead>Status</TableHead> */}
                 <TableHead className="text-right">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {products.map((data) => (
+              {products?.data?.map((data) => (
                 <TableRow key={data._id}>
                   <TableCell>{data.title}</TableCell>
+                  <TableCell>
+                    {data.image && (
+                      <Image
+                        src={data.image}
+                        alt={data.image}
+                        width={50}
+                        height={50}
+                      />
+                    )}
+                  </TableCell>
                   <TableCell>{data.description}</TableCell>
                   <TableCell>{data.category}</TableCell>
                   <TableCell>{data.price}</TableCell>
-                  <TableCell>{data.status}</TableCell>
+                  {/* <TableCell>{data.status}</TableCell> */}
                   <TableCell className="text-right space-x-2">
                     {/* <Button size={"icon"} variant={"ghost"}>
                       <Link href={`/bookings/${request._id}`}>

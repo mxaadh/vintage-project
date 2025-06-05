@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { registerUser } from "@/lib/api/auth";
-import { IUserResponse, RegisterPayload } from "@/types/user";
+import { IUserResponse, RegisterPayload } from "@/types/";
 
 const SignupForm = () => {
   const router = useRouter();

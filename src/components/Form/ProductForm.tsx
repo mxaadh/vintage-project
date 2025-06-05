@@ -6,11 +6,12 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
-import { ProductPayload, ProductData } from "@/types/product";
+import { IProductPayload, IProduct } from "@/types/";
+import { uploadImage } from "@/lib/api/upload";
 
 interface ProductFormProps {
-  initialData?: ProductData;
-  onSubmit: (data: ProductPayload) => void;
+  initialData?: IProduct;
+  onSubmit: (data: IProductPayload) => void;
   isSubmitting?: boolean;
 }
 
@@ -27,6 +28,7 @@ export default function ProductForm({
     category: initialData?.category || "",
     price: initialData?.price?.toString() || "",
   });
+  const backendHost = process.env.NEXT_PUBLIC_BACKEND_HOST;
 
   useEffect(() => {
     if (initialData) {
@@ -43,11 +45,31 @@ export default function ProductForm({
 
   const [errors, setErrors] = useState<Record<string, string>>({});
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e?.target?.files?.[0];
+    if (file) {
+      uploadImage(file)
+        .then((data) => {
+          const fullPath = backendHost + data.path;
+          setFormData((prev) => ({
+            ...prev,
+            image: fullPath,
+          }));
+        })
+        .catch((error) => {
+          console.error("Upload failed:", error);
+        });
+    }
+  };
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   const validate = () => {
@@ -66,6 +88,8 @@ export default function ProductForm({
       ...formData,
       price: Number(formData.price),
     };
+
+    console.log(payload, "<< payload");
     onSubmit(payload);
   };
 
@@ -88,13 +112,15 @@ export default function ProductForm({
           </div>
 
           <div>
-            <Label htmlFor="image">Image URL</Label>
+            <Label htmlFor="image">
+              Image URL {formData.image && `(${formData.image})`}
+            </Label>
             <Input
               id="image"
               name="image"
-              value={formData.image}
-              onChange={handleChange}
-              placeholder="https://example.com/image.jpg"
+              type="file"
+              onChange={handleFileChange}
+              accept="image/*"
             />
           </div>
 

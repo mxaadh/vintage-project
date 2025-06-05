@@ -1,44 +1,38 @@
 "use client";
 
 import PageHeadingButtons from "@/components/PageheadingButton";
-import ProductForm from "@/components/ProductForm";
+import ProductForm from "@/components/Form/ProductForm";
 import { useAuth } from "@/context/AuthContext";
 import { getProductById, updateProduct } from "@/lib/api/product";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { ProductPayload, ProductResponse } from "@/types/product";
+import { IProduct, IProductPayload } from "@/types/";
 
-interface EditPageProps {
-  params: {
-    id: string;
-  };
-}
-
-const Edit = ({ params }: EditPageProps) => {
-  const { id } = params;
+const Edit = () => {
+  const params = useParams();
+  const id = params?.id as string;
 
   const router = useRouter();
   const { token } = useAuth();
-  const [idata, setIdata] = useState([]);
+  const [idata, setIdata] = useState<IProduct>();
 
   useEffect(() => {
     async function fetchProduct() {
       try {
-        const response: ProductResponse = await getProductById(id);
-        setIdata(response.data);
+        const response: IProduct = await getProductById(id);
+        setIdata(response);
       } catch (error: unknown) {
         if (error instanceof Error) console.error(error.message);
       }
     }
-    fetchProduct();
+    if (id) fetchProduct();
   }, [id]);
 
-  async function onSubmit(data: ProductPayload) {
+  async function onSubmit(data: IProductPayload) {
     try {
-      const response: ProductResponse = await updateProduct(id, data, token);
+      const response: IProduct = await updateProduct(id, data, token);
       console.log("Product updated:", response);
       router.push("/admin/product");
-      // Optional: show success toast or redirect
     } catch (error: unknown) {
       if (error instanceof Error) console.error(error.message);
     }

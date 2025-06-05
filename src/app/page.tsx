@@ -5,7 +5,7 @@ import NewProducts from "@/components/NewProducts";
 import Subs from "@/components/Subs";
 import Testimonial from "@/components/Testimonial";
 import { getAllProducts } from "@/lib/api/product";
-import { Product } from "@/types/product";
+import { IProductResponse } from "@/types/";
 import { useEffect, useState } from "react";
 
 const cproducts = [
@@ -110,18 +110,16 @@ const sproducts = [
 ];
 
 const Page = () => {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<IProductResponse>();
 
   useEffect(() => {
-    getAllProducts()
-      .then((data) => {
-        setProducts(data.products);
-        console.log("product data", products);
-        // Removed redundant logging of products to avoid dependency issues
-      })
-      // Removed redundant logging of products to avoid dependency issues
-      .catch((err) => console.error(err.message));
-  }, [products]); // Dependency array remains empty to avoid infinite loop
+    fetchProducts();
+  }, [products]);
+
+  const fetchProducts = async () => {
+    const res: IProductResponse = await getAllProducts();
+    setProducts(res);
+  };
 
   return (
     <div>

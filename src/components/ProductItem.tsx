@@ -1,15 +1,9 @@
+import { IProduct } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 
-type Product = {
-  id: number;
-  title: string;
-  price: string;
-  image: string;
-};
-
 type ProductItemProps = {
-  product: Product;
+  product: IProduct;
 };
 
 const ProductItem = ({ product }: ProductItemProps) => {
@@ -38,7 +32,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
             {product.title}
           </Link>
           <div className="left-0 top-[60px] absolute text-[#898989] text-sm font-small font-['Poppins'] leading-normal">
-            {product.detail}
+            {product?.description}
           </div>
           <div className="h-[30px] left-0 top-[110px] absolute justify-start items-center gap-4 inline-flex">
             <h4 className="text-[#3a3a3a] text-xl font-semibold font-['Poppins'] leading-[30px]">
