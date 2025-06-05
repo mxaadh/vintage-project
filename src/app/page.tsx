@@ -8,6 +8,42 @@ import { getAllProducts } from "@/lib/api/product";
 import { IProductResponse } from "@/types/";
 import { useEffect, useState } from "react";
 
+const Page = () => {
+  const [cproducts, setCProducts] = useState<IProductResponse>();
+  const [hproducts, setHProducts] = useState<IProductResponse>();
+  const [sproducts, setSProducts] = useState<IProductResponse>();
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const fetchProducts = async () => {
+    const res: IProductResponse = await getAllProducts();
+    setCProducts(res);
+    setHProducts(res);
+    setSProducts(res);
+  };
+
+  return (
+    <div>
+      {/* <BannersTwo
+        imageURL={"/assets/images/banner/b4.jpg"}
+      /> */}
+      <Hero />
+      {cproducts && <NewProducts title={"Creative"} products={cproducts} />}
+      {hproducts && <NewProducts title={"Heritage"} products={hproducts} />}
+      {sproducts && <NewProducts title={"Scrapyard"} products={sproducts} />}
+      {/* <Pagination /> */}
+      <Subs />
+      <Testimonial />
+      {/* <Contact /> */}
+    </div>
+  );
+};
+
+export default Page;
+
+/* 
 const cproducts = [
   {
     id: 1,
@@ -107,35 +143,4 @@ const sproducts = [
     price: "PRICE $225",
     image: "/assets/images/scrapyard/P04.jpg",
   },
-];
-
-const Page = () => {
-  const [products, setProducts] = useState<IProductResponse>();
-
-  useEffect(() => {
-    fetchProducts();
-  }, [products]);
-
-  const fetchProducts = async () => {
-    const res: IProductResponse = await getAllProducts();
-    setProducts(res);
-  };
-
-  return (
-    <div>
-      {/* <BannersTwo
-        imageURL={"/assets/images/banner/b4.jpg"}
-      /> */}
-      <Hero />
-      <NewProducts title={"Creative"} products={cproducts} />
-      <NewProducts title={"Heritage"} products={hproducts} />
-      <NewProducts title={"Scrapyard"} products={sproducts} />
-      {/* <Pagination /> */}
-      <Subs />
-      <Testimonial />
-      {/* <Contact /> */}
-    </div>
-  );
-};
-
-export default Page;
+]; */

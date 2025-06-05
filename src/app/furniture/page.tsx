@@ -1,7 +1,34 @@
+"use client";
+
 import BannerThree from "@/components/BannersThree";
 import NewProducts from "@/components/NewProducts";
+import { getAllProducts } from "@/lib/api/product";
+import { IProductResponse } from "@/types";
+import { useEffect, useState } from "react";
 
-const furniture_products = [
+const Furniture = () => {
+  const [products, setProducts] = useState<IProductResponse>();
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const fetchProducts = async () => {
+    const res: IProductResponse = await getAllProducts();
+    setProducts(res);
+  };
+
+  return (
+    <div>
+      <BannerThree name="Furniture" />
+      {products && <NewProducts title={"Furniture"} products={products} />}
+    </div>
+  );
+};
+
+export default Furniture;
+
+/* const furniture_products = [
   {
     id: 1,
     title: "Modern Sofa",
@@ -128,15 +155,4 @@ const furniture_products = [
     category: "Storage",
     material: "Teak",
   },
-];
-
-const Creative = () => {
-  return (
-    <div>
-      <BannerThree name="Furniture" />
-      <NewProducts title={"Furniture"} products={furniture_products} />
-    </div>
-  );
-};
-
-export default Creative;
+]; */

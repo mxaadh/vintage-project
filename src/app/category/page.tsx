@@ -1,6 +1,65 @@
+"use client";
+
 import BannersOne from "@/components/BannersOne";
 import Newsletter from "@/components/Form/Newsletter";
 import NewProducts from "@/components/NewProducts";
+import { getAllProducts } from "@/lib/api/product";
+import { IProductResponse } from "@/types";
+import { useEffect, useState } from "react";
+
+const Category = () => {
+  const [cproducts, setCProducts] = useState<IProductResponse>();
+  const [hproducts, setHProducts] = useState<IProductResponse>();
+  const [sproducts, setSProducts] = useState<IProductResponse>();
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const fetchProducts = async () => {
+    const res: IProductResponse = await getAllProducts();
+    setCProducts(res);
+    setHProducts(res);
+    setSProducts(res);
+  };
+
+  return (
+    <div>
+      <BannersOne
+        image={"/assets/images/category/c1.jpg"}
+        title={"Creative"}
+        button={{
+          btnTitle: "Get Yours Creative",
+          link: "creative",
+        }}
+      />
+      {cproducts && <NewProducts title={"Creative"} products={cproducts} />}
+      <BannersOne
+        image={"/assets/images/category/c2.jpg"}
+        title={"Heritage"}
+        button={{
+          btnTitle: "Get Yours Heritage",
+          link: "heritage",
+        }}
+      />
+      {hproducts && <NewProducts title={"Heritage"} products={hproducts} />}
+      <BannersOne
+        image={"/assets/images/category/c3.jpg"}
+        title={"Scrapyard"}
+        button={{
+          btnTitle: "Get Yours Scrapyard",
+          link: "scrapyard",
+        }}
+      />
+      {sproducts && <NewProducts title={"Scrapyard"} products={sproducts} />}
+      <Newsletter />
+    </div>
+  );
+};
+
+export default Category;
+
+/*
 
 const creative_products = {
   data: [
@@ -89,39 +148,4 @@ const scrapyard_products = {
   ],
 };
 
-const Category = () => {
-  return (
-    <div>
-      <BannersOne
-        image={"/assets/images/category/c1.jpg"}
-        title={"Creative"}
-        button={{
-          btnTitle: "Get Yours Creative",
-          link: "creative",
-        }}
-      />
-      <NewProducts title={"Creative"} products={creative_products} />
-      <BannersOne
-        image={"/assets/images/category/c2.jpg"}
-        title={"Heritage"}
-        button={{
-          btnTitle: "Get Yours Heritage",
-          link: "heritage",
-        }}
-      />
-      <NewProducts title={"Heritage"} products={heritage_products} />
-      <BannersOne
-        image={"/assets/images/category/c3.jpg"}
-        title={"Scrapyard"}
-        button={{
-          btnTitle: "Get Yours Scrapyard",
-          link: "scrapyard",
-        }}
-      />
-      <NewProducts title={"Scrapyard"} products={scrapyard_products} />
-      <Newsletter />
-    </div>
-  );
-};
-
-export default Category;
+*/

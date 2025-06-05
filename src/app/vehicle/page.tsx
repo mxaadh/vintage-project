@@ -1,7 +1,34 @@
+"use client";
+
 import BannerThree from "@/components/BannersThree";
 import NewProducts from "@/components/NewProducts";
+import { getAllProducts } from "@/lib/api/product";
+import { IProductResponse } from "@/types";
+import { useEffect, useState } from "react";
 
-const vehicle_products = [
+const Vehicle = () => {
+  const [products, setProducts] = useState<IProductResponse>();
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const fetchProducts = async () => {
+    const res: IProductResponse = await getAllProducts();
+    setProducts(res);
+  };
+
+  return (
+    <div>
+      <BannerThree name="Vehicle" />
+      {products && <NewProducts title={"Vehicle"} products={products} />}
+    </div>
+  );
+};
+
+export default Vehicle;
+
+/* const vehicle_products = [
   {
     id: 1,
     title: "Vintage Motorcycle Helmet",
@@ -99,14 +126,4 @@ const vehicle_products = [
     category: "Lighting",
   },
 ];
-
-const Creative = () => {
-  return (
-    <div>
-      <BannerThree name="Vehicle" />
-      <NewProducts title={"Vehicle"} products={vehicle_products} />
-    </div>
-  );
-};
-
-export default Creative;
+ */

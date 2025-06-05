@@ -1,5 +1,34 @@
+"use client";
+
 import BannerThree from "@/components/BannersThree";
 import NewProducts from "@/components/NewProducts";
+import { getAllProducts } from "@/lib/api/product";
+import { IProductResponse } from "@/types";
+import { useEffect, useState } from "react";
+
+const Creative = () => {
+  const [products, setProducts] = useState<IProductResponse>();
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const fetchProducts = async () => {
+    const res: IProductResponse = await getAllProducts();
+    setProducts(res);
+  };
+
+  return (
+    <div>
+      <BannerThree name="Decorative" />
+      {products && <NewProducts title={"Decorative"} products={products} />}
+    </div>
+  );
+};
+
+export default Creative;
+
+/* 
 
 const decorative_products = [
   {
@@ -109,13 +138,4 @@ const decorative_products = [
   // },
 ];
 
-const Creative = () => {
-  return (
-    <div>
-      <BannerThree name="Decorative" />
-      <NewProducts title={"Decorative"} products={decorative_products} />
-    </div>
-  );
-};
-
-export default Creative;
+*/

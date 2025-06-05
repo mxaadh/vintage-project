@@ -5,9 +5,15 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'flowbite.com',
-        pathname: '/docs/images/**',
+        protocol: "https",
+        hostname: "flowbite.com",
+        pathname: "/docs/images/**",
+      },
+      {
+        protocol: "http",
+        hostname: "localhost",
+        port: "5000",
+        pathname: "/uploads/**",
       },
     ],
   },

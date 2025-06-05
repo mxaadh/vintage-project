@@ -8,6 +8,15 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { IProductPayload, IProduct } from "@/types/";
 import { uploadImage } from "@/lib/api/upload";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface ProductFormProps {
   initialData?: IProduct;
@@ -89,7 +98,7 @@ export default function ProductForm({
       price: Number(formData.price),
     };
 
-    console.log(payload, "<< payload");
+    // console.log(payload, "<< payload");
     onSubmit(payload);
   };
 
@@ -148,13 +157,27 @@ export default function ProductForm({
 
           <div>
             <Label htmlFor="category">Category</Label>
-            <Input
-              id="category"
-              name="category"
+            <Select
               value={formData.category}
-              onChange={handleChange}
-              placeholder="Category"
-            />
+              onValueChange={(value) => {
+                setFormData((prev) => ({ ...prev, category: value }));
+              }}
+            >
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Select a Category" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Category</SelectLabel>
+                  <SelectItem value="Creative">Creative</SelectItem>
+                  <SelectItem value="Heritage">Heritage</SelectItem>
+                  <SelectItem value="Scrapyard">Scrapyard</SelectItem>
+                  <SelectItem value="Furniture">Furniture</SelectItem>
+                  <SelectItem value="Vehicle">Vehicle</SelectItem>
+                  <SelectItem value="Decorative">Decorative</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
           </div>
 
           <div>

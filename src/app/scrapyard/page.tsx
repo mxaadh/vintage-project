@@ -1,7 +1,34 @@
+"use client";
+
 import BannerThree from "@/components/BannersThree";
 import NewProducts from "@/components/NewProducts";
+import { getAllProducts } from "@/lib/api/product";
+import { IProductResponse } from "@/types";
+import { useEffect, useState } from "react";
 
-const scrapyard_products = [
+const Scrapyard = () => {
+  const [products, setProducts] = useState<IProductResponse>();
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const fetchProducts = async () => {
+    const res: IProductResponse = await getAllProducts();
+    setProducts(res);
+  };
+
+  return (
+    <div>
+      <BannerThree name="Scrapyard" />
+      {products && <NewProducts title={"Scrapyard"} products={products} />}
+    </div>
+  );
+};
+
+export default Scrapyard;
+
+/* const scrapyard_products = [
   {
     id: 1,
     title: "Industrial Pipe Bookshelf",
@@ -121,15 +148,4 @@ const scrapyard_products = [
     price: "PRICE $120",
     image: "/assets/images/scrapyard/P3.jpg",
   },
-];
-
-const Scrapyard = () => {
-  return (
-    <div>
-      <BannerThree name={"Scrapyard"} />
-      <NewProducts title={"Scrapyard"} products={scrapyard_products} />
-    </div>
-  );
-};
-
-export default Scrapyard;
+]; */
