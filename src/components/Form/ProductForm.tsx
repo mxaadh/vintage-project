@@ -38,6 +38,7 @@ export default function ProductForm({
     price: initialData?.price?.toString() || "",
   });
   const backendHost = process.env.NEXT_PUBLIC_BACKEND_HOST;
+  console.log(backendHost, "<< backendHost env");
 
   useEffect(() => {
     if (initialData) {
