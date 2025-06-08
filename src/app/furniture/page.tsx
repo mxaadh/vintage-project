@@ -14,7 +14,9 @@ const Furniture = () => {
   }, []);
 
   const fetchProducts = async () => {
-    const res: IProductResponse = await getAllProducts();
+    const res: IProductResponse = await getAllProducts({
+      category: "Furniture",
+    });
     setProducts(res);
   };
 

@@ -14,7 +14,9 @@ const Creative = () => {
   }, []);
 
   const fetchProducts = async () => {
-    const res: IProductResponse = await getAllProducts();
+    const res: IProductResponse = await getAllProducts({
+      category: "Decorative",
+    });
     setProducts(res);
   };
 
