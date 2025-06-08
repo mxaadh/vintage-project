@@ -1,9 +1,27 @@
+"use client";
+
 import LoginForm from "@/components/Form/LoginForm";
+import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
+  const { token } = useAuth();
+  const router = useRouter();
+
+  if (token) {
+    console.log(token, "<< token");
+    router.back();
+  }
+
   return (
     <div>
-      <LoginForm />
+      {token ? (
+        <center>
+          <h1 className="h-screen pt-5 mt-5">Already Loged-in</h1>
+        </center>
+      ) : (
+        <LoginForm />
+      )}
     </div>
   );
 };

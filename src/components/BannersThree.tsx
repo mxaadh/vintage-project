@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Button from "./Button";
 
 type BannerThreeProps = {
@@ -14,7 +15,9 @@ const BannerThree = ({ name }: BannerThreeProps) => {
           </h2>
 
           <div className="mt-4 sm:mt-8 flex justify-center">
-            <Button name={"Get Yours Today"} />
+            <Link href={"/bid"}>
+              <Button name={"Get Yours Today"} />
+            </Link>
           </div>
         </div>
       </div>

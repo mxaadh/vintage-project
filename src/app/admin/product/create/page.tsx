@@ -12,8 +12,6 @@ const Create = () => {
   const { token } = useAuth();
 
   async function onCreateSubmit(data: IProductPayload): Promise<void> {
-    console.log(data, "<< data");
-
     try {
       await createProduct(data, token);
       router.push("/admin/product");

@@ -1,13 +1,28 @@
-import { IProduct, IProductResponse } from "@/types/";
+import { IProduct, IProductPayload, IProductResponse } from "@/types/";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL;
 
-export async function getAllProducts(): Promise<IProductResponse> {
-  const res = await fetch(`${API_BASE}/products`);
+export async function getAllProducts(
+  queryParams: Record<string, string | number> = {}
+): Promise<IProductResponse> {
+  // Convert query parameters to URLSearchParams
+  const queryString = new URLSearchParams();
+
+  // Add each query parameter to the URLSearchParams
+  Object.entries(queryParams).forEach(([key, value]) => {
+    queryString.append(key, String(value));
+  });
+
+  // Construct the full URL with query parameters
+  const url = `${API_BASE}/products?${queryString.toString()}`;
+
+  const res = await fetch(url);
+
   if (!res.ok) {
     const error = await res.json();
     throw new Error(error.message || "Failed to fetch products");
   }
+
   return res.json();
 }
 
@@ -23,14 +38,7 @@ export async function getProductById(id: string): Promise<IProduct> {
 }
 
 export async function createProduct(
-  productData: {
-    title: string;
-    image?: string;
-    description?: string;
-    brand?: string;
-    category?: string;
-    price: number;
-  },
+  productData: IProductPayload,
   token: string
 ): Promise<IProduct> {
   const myHeaders = new Headers();
@@ -60,14 +68,7 @@ export async function createProduct(
 
 export async function updateProduct(
   id: string,
-  productData: {
-    title: string;
-    image?: string;
-    description?: string;
-    brand?: string;
-    category?: string;
-    price: number;
-  },
+  productData: IProductPayload,
   token: string
 ): Promise<IProduct> {
   const myHeaders = new Headers();

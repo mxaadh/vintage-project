@@ -104,12 +104,15 @@ export default function ProductForm({
   };
 
   return (
-    <Card className="max-w-2xl mx-auto">
-      <CardContent className="p-6">
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <Label htmlFor="title">Title</Label>
+    <Card className="max-w-5xl mx-auto">
+      <CardContent className="p-10">
+        <form onSubmit={handleSubmit} className="space-y-10">
+          <div className="space-y-2">
+            <Label className="font-semibold text-xl" htmlFor="title">
+              Title
+            </Label>
             <Input
+              className="border-2 border-black"
               id="title"
               name="title"
               value={formData.title}
@@ -121,11 +124,12 @@ export default function ProductForm({
             )}
           </div>
 
-          <div>
-            <Label htmlFor="image">
+          <div className="space-y-2">
+            <Label className="font-semibold text-xl" htmlFor="image">
               Image URL {formData.image && `(${formData.image})`}
             </Label>
             <Input
+              className="border-2 border-black "
               id="image"
               name="image"
               type="file"
@@ -134,9 +138,12 @@ export default function ProductForm({
             />
           </div>
 
-          <div>
-            <Label htmlFor="description">Description</Label>
+          <div className="space-y-2">
+            <Label className="font-semibold text-xl" htmlFor="description">
+              Description
+            </Label>
             <Textarea
+              className="border-2 border-black "
               id="description"
               name="description"
               value={formData.description}
@@ -145,9 +152,12 @@ export default function ProductForm({
             />
           </div>
 
-          <div>
-            <Label htmlFor="brand">Brand</Label>
+          <div className="space-y-2">
+            <Label className="font-semibold text-xl" htmlFor="brand">
+              Brand
+            </Label>
             <Input
+              className="border-2 border-black "
               id="brand"
               name="brand"
               value={formData.brand}
@@ -156,15 +166,17 @@ export default function ProductForm({
             />
           </div>
 
-          <div>
-            <Label htmlFor="category">Category</Label>
+          <div className="space-y-2">
+            <Label className="font-semibold text-xl" htmlFor="category">
+              Category
+            </Label>
             <Select
               value={formData.category}
               onValueChange={(value) => {
                 setFormData((prev) => ({ ...prev, category: value }));
               }}
             >
-              <SelectTrigger className="w-full">
+              <SelectTrigger className="w-full border-2 border-black">
                 <SelectValue placeholder="Select a Category" />
               </SelectTrigger>
               <SelectContent>
@@ -181,9 +193,12 @@ export default function ProductForm({
             </Select>
           </div>
 
-          <div>
-            <Label htmlFor="price">Price</Label>
+          <div className="space-y-2">
+            <Label className="font-semibold text-xl" htmlFor="price">
+              Price
+            </Label>
             <Input
+              className="border-2 border-black "
               id="price"
               name="price"
               type="number"
@@ -197,7 +212,11 @@ export default function ProductForm({
           </div>
 
           <div>
-            <Button type="submit" disabled={isSubmitting}>
+            <Button
+              type="submit"
+              className="w-[240px] flex justify-center bg-Terracotta  hover:bg-AntiqueGold text-MutedSand p-3  rounded-full tracking-wide font-semibold  shadow-lg cursor-pointer transition ease-in duration-500"
+              disabled={isSubmitting}
+            >
               {isSubmitting ? "Submitting..." : "Submit"}
             </Button>
           </div>

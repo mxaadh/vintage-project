@@ -1,7 +1,30 @@
+"use client";
+
 import Button from "@/components/Button";
+import { getProductById } from "@/lib/api/product";
+import { IProduct } from "@/types";
 import Image from "next/image";
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import Link from "next/link";
 
 const Detail = () => {
+  const params = useParams();
+  const id = params?._id as string;
+  const [idata, setIdata] = useState<IProduct>();
+
+  useEffect(() => {
+    async function fetchProduct() {
+      try {
+        const response: IProduct = await getProductById(id);
+        setIdata(response);
+      } catch (error: unknown) {
+        if (error instanceof Error) console.error(error.message);
+      }
+    }
+    if (id) fetchProduct();
+  }, [id]);
+
   return (
     <div>
       <section className="py-8 bg-white md:py-16 antialiased">
@@ -9,25 +32,26 @@ const Detail = () => {
           <div className="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
             <div className="shrink-0 max-w-md lg:max-w-lg mx-auto">
               <h1 className="text-[40px] font-semibold text-CoffeeBrown">
-                Light Blue/Teal Tufted Sofa
+                {idata?.title}
               </h1>
-              <Image
-                className="w-full"
-                src="/assets/images/funniture/P06.jpg"
-                // src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front.svg"
-                alt="iMac Front"
-                width={500}
-                height={500}
-              />
+              {idata?.image && (
+                <Image
+                  className="w-full"
+                  src={idata?.image}
+                  alt="iMac Front"
+                  width={500}
+                  height={500}
+                />
+              )}
             </div>
 
             <div className="mt-6 sm:mt-8 lg:mt-0 bg-MutedSand p-10 rounded-2xl">
               <h1 className="text-xl font-semibold text-slate-950a sm:text-2xl">
-                Bit Starting From
+                Bid Starting From
               </h1>
               <div className="mt-4 sm:items-center sm:gap-4 sm:flex">
                 <p className="text-2xl font-extrabold text-slate-950a sm:text-3xl">
-                  $1,249.99
+                  ${idata?.price}
                 </p>
 
                 <div className="flex items-center gap-2 mt-2 sm:mt-0">
@@ -88,22 +112,14 @@ const Detail = () => {
                   Add to favorites
                 </a> */}
 
-                <Button name={"Place a BIT"} />
+                <Link href={`/bid/detail/${id}`}>
+                  <Button name={"Place a BID"} />
+                </Link>
               </div>
 
               <hr className="my-6 md:my-8 border-gray-500" />
 
-              <p className="mb-6 text-gray-600">
-                This elegant light blue/teal sofa offers a harmonious blend of
-                classic design elements and a refreshing contemporary hue. The
-                soft, inviting upholstery in a serene shade of blue-green brings
-                a touch of tranquility and sophistication to any living space.
-                The meticulously crafted tufted back not only adds a visually
-                appealing texture and depth but also provides comfortable
-                support for lounging and relaxation. Each indentation in the
-                tufting is carefully placed, creating a diamond or square
-                pattern that speaks to the sofas refined craftsmanship.
-              </p>
+              <p className="mb-6 text-gray-600">{idata?.description}</p>
             </div>
           </div>
         </div>

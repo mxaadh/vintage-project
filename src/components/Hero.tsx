@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const Hero = () => {
   return (
     <section className="relative bg-[url(/assets/images/banner/B10.jpg)] bg-cover bg-center bg-no-repeat  ">
@@ -20,11 +22,13 @@ const Hero = () => {
               Explore our exclusive collection of handcrafted vintage pieces,
               carefully curated to bring character and charm into your space.
             </div>
-            <div className="h-[74px] px-[72px] py-[25px] left-0 top-[270px] absolute bg-Terracotta border-2 justify-start items-start gap-2.5 inline-flex">
-              <div className="text-WarmWhite text-base font-bold font-['Poppins'] uppercase">
-                BID NOW
+            <Link href={"/bid"}>
+              <div className="h-[74px] px-[72px] py-[25px] left-0 top-[270px] absolute bg-Terracotta border-2 justify-start items-start gap-2.5 inline-flex">
+                <div className="text-WarmWhite text-base font-bold font-['Poppins'] uppercase">
+                  BID NOW
+                </div>
               </div>
-            </div>
+            </Link>
             <div className="left-[2px] top-0 absolute text-CharcoalBlack text-base font-semibold font-['Poppins'] tracking-[3px]">
               New Arrival
             </div>

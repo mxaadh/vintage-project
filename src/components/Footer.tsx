@@ -313,7 +313,7 @@ const Footer = () => {
             </p>
 
             <p className="mt-4 text-sm text-WarmWhite sm:order-first sm:mt-0">
-              &copy; 2022 Company Name
+              &copy; 2025 Company Name
             </p>
           </div>
         </div>

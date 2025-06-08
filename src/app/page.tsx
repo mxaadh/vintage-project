@@ -18,10 +18,23 @@ const Page = () => {
   }, []);
 
   const fetchProducts = async () => {
-    const res: IProductResponse = await getAllProducts();
-    setCProducts(res);
-    setHProducts(res);
-    setSProducts(res);
+    const creativeRes: IProductResponse = await getAllProducts({
+      category: "Creative",
+      limit: 4,
+    });
+    setCProducts(creativeRes);
+
+    const heritageRes: IProductResponse = await getAllProducts({
+      category: "Heritage",
+      limit: 4,
+    });
+    setHProducts(heritageRes);
+
+    const scrapyardRes: IProductResponse = await getAllProducts({
+      category: "Scrapyard",
+      limit: 4,
+    });
+    setSProducts(scrapyardRes);
   };
 
   return (

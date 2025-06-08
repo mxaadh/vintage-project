@@ -1,4 +1,6 @@
-import { Calendar, Home, Inbox, LogOut, Settings } from "lucide-react";
+"use client";
+
+import { Calendar, Home, Inbox, LogOut, Settings, Globe } from "lucide-react";
 
 import {
   Sidebar,
@@ -10,9 +12,17 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { useAuth } from "@/context/AuthContext";
+import { redirect } from "next/navigation";
+import Link from "next/link";
 
 // Menu items.
 const items = [
+  {
+    title: "My Site",
+    url: "/",
+    icon: Globe,
+  },
   {
     title: "Home",
     url: "/admin",
@@ -33,14 +43,21 @@ const items = [
     url: "/admin/setting",
     icon: Settings,
   },
-  {
-    title: "Logout",
-    url: "/admin/logout",
-    icon: LogOut,
-  },
+  // {
+  //   title: "Logout",
+  //   url: "/admin/logout",
+  //   icon: LogOut,
+  // },
 ];
 
 export function AppSidebar() {
+  const { logout } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+    redirect("/");
+  };
+
   return (
     <Sidebar>
       <SidebarContent>
@@ -51,13 +68,21 @@ export function AppSidebar() {
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <a href={item.url}>
+                    <Link href={item.url}>
                       <item.icon />
                       <span>{item.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
+              <SidebarMenuItem onClick={handleLogout}>
+                <SidebarMenuButton>
+                  <span className="flex justify-between items-center">
+                    <LogOut />
+                    <span>Logout</span>
+                  </span>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>

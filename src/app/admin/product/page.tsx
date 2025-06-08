@@ -1,9 +1,13 @@
 "use client";
 
-import PageHeadingButtons from "@/components/PageheadingButton";
-import { Button } from "@/components/ui/button";
-import { Edit, Plus, Trash } from "lucide-react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { Edit, Plus, Trash } from "lucide-react";
+import PageHeadingButtons from "@/components/PageheadingButton";
+import SetTimer from "@/components/SetTimer";
+import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -19,12 +23,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useEffect, useState } from "react";
-import { deleteProduct, getAllProducts } from "@/lib/api/product";
-import { useRouter } from "next/navigation";
+import {
+  deleteProduct,
+  getAllProducts,
+} from "@/lib/api/product";
 import { useAuth } from "@/context/AuthContext";
 import { IProductResponse } from "@/types";
-import Image from "next/image";
 
 const Product = () => {
   const { token } = useAuth();
@@ -87,7 +91,7 @@ const Product = () => {
                 <TableHead>Description</TableHead>
                 <TableHead>Category</TableHead>
                 <TableHead>Price</TableHead>
-                {/* <TableHead>Status</TableHead> */}
+                <TableHead>Timer</TableHead>
                 <TableHead className="text-right">Actions</TableHead>
               </TableRow>
             </TableHeader>
@@ -108,10 +112,12 @@ const Product = () => {
                   <TableCell>{data.description}</TableCell>
                   <TableCell>{data.category}</TableCell>
                   <TableCell>{data.price}</TableCell>
-                  {/* <TableCell>{data.status}</TableCell> */}
+                  <TableCell>
+                    <SetTimer oldData={data} />
+                  </TableCell>
                   <TableCell className="text-right space-x-2">
                     {/* <Button size={"icon"} variant={"ghost"}>
-                      <Link href={`/bookings/${request._id}`}>
+                      <Link href={`/admin/product/${data._id}`}>
                         <EyeIcon className={"text-green-800"} />
                       </Link>
                     </Button> */}

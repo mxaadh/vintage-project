@@ -44,6 +44,9 @@ export interface IProduct {
   createdAt?: string;
   updatedAt?: string;
   __v?: number;
+  endDate?: string;
+  endHour?: string;
+  endMinute?: string;
 }
 
 export interface IProductResponse {
@@ -58,9 +61,32 @@ export interface IProductPayload {
   category?: string;
   price: number;
   countInStock?: number;
+  endDate?: string;
+  endHour?: string;
+  endMinute?: string;
 }
 
 export interface IProductPayloadWithToken {
   data: IProductPayload;
   token: string;
+}
+
+// Bid
+export interface IBid {
+  _id: string;
+  name: string;
+  email: string;
+  product: string;
+  bidAmount: number;
+}
+
+export interface IBidResponse {
+  data: IBid[];
+}
+
+export interface IBidPayload {
+  name: string;
+  email: string;
+  product: string;
+  bidAmount: number;
 }

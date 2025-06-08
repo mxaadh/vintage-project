@@ -26,7 +26,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
       <div className="w-56 left-[16px] top-[317px] absolute">
         <div className="w-56 h-[61px] left-0 top-0 absolute">
           <Link
-            href={"/detail"}
+            href={`/detail/${product._id}`}
             className="left-0 top-0 absolute text-[#3a3a3a] text-2xl font-semibold font-['Poppins'] leading-[28.80px] hover:text-AntiqueGold"
           >
             {product.title}

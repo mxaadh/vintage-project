@@ -6,9 +6,10 @@ import { TbLogout } from "react-icons/tb";
 import Logo from "./Logo";
 import Link from "next/link";
 import { useAuth } from "../context/AuthContext";
+import { CircleUser, CirclePlus } from "lucide-react";
 
 const HeaderMain = () => {
-  const { auth, logout } = useAuth();
+  const { user, auth, logout } = useAuth();
 
   return (
     <div className="bg-Terracotta border-b border-Terracotta bg-gradient-to-b from-MutedSand/30 to-Terracotta/25 py-4">
@@ -32,9 +33,26 @@ const HeaderMain = () => {
 
         <div className="hidden lg:flex gap-4 text-WarmWhite text-[30px]">
           {auth ? (
-            <button onClick={logout}>
-              <TbLogout />
-            </button>
+            <div className="flex justify-between items-center gap-4">
+              <p className="flex justify-between items-center gap-1 font-semibold text-lg">
+                {JSON.parse(user)?.first_name}
+                {(JSON.parse(user)?.isAdmin === true) && (
+                  <p className="font-semibold text-xs">(Admin)</p>
+                )}
+              </p>
+              <button onClick={logout}>
+                <TbLogout />
+              </button>
+              {(JSON.parse(user)?.isAdmin === true) ? (
+                <Link href={"/admin"}>
+                  <CircleUser />
+                </Link>
+              ) : (
+                <Link href={"/add-product"}>
+                  <CirclePlus />
+                </Link>
+              )}
+            </div>
           ) : (
             <>
               <Link href="/login" className="hover:text-MutedSand">
