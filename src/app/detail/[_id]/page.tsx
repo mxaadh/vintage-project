@@ -2,16 +2,57 @@
 
 import Button from "@/components/Button";
 import { getProductById } from "@/lib/api/product";
-import { IProduct } from "@/types";
+import { IProduct, IWishlistPayload, IWishlistResponse } from "@/types";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { createWishlist } from "@/lib/api/bid";
+import { useAuth } from "@/context/AuthContext";
+import { Loader2 } from "lucide-react";
 
 const Detail = () => {
+  const { token } = useAuth()
   const params = useParams();
   const id = params?._id as string;
   const [idata, setIdata] = useState<IProduct>();
+  const [email, setEmail] = useState<string>()
+  const [loading, setLoading] = useState<boolean>()
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Basic form validation
+    if (!email || !email.includes("@")) {
+      alert("Please enter a valid email.");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      // Replace this with your actual API call for submission
+      const formData: IWishlistPayload = {
+        email,
+        product: id,
+      }
+      const response: IWishlistResponse = await createWishlist(formData, token);
+
+      // Example: if successful, redirect or show success message
+      if (response.message) {
+        console.log("Submission successful", response.message);
+        alert("Thank you! We will notify you via email when the auction starts.");
+      } else {
+        throw new Error(response.message || "Something went wrong.");
+      }
+    } catch (error: unknown) {
+      console.error("Submission error:", error);
+    } finally {
+      setLoading(false);
+      setEmail("")
+    }
+  };
+
 
   useEffect(() => {
     async function fetchProduct() {
@@ -112,9 +153,41 @@ const Detail = () => {
                   Add to favorites
                 </a> */}
 
-                <Link href={`/bid/detail/${id}`}>
-                  <Button name={"Place a BID"} />
-                </Link>
+                {idata?.endDate ? (
+                  <Link href={`/bid/detail/${id}`}>
+                    <Button name={"Place a BID"} />
+                  </Link>
+                ) : (
+                  <div className="p-6 space-y-4 w-full">
+                    <div>
+                      <label htmlFor="email" className="block text-xl font-semibold text-CoffeeBrown mb-1">
+                        Enter your Email
+                      </label>
+                      <div className="flex justify-between items-center gap-2">
+                        <input
+                          type="email"
+                          id="email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-CoffeeBrown"
+                          placeholder="you@example.com"
+                          required
+                          readOnly={loading}
+                        />
+                        <button
+                          type="submit"
+                          onClick={handleSubmit}
+                          className="w-200 py-2 px-4 bg-Terracotta text-white font-semibold rounded-lg hover:bg-AntiqueGold transition duration-200 float-end flex justify-between items-center"
+                          disabled={loading}
+                        >
+                          {loading && <Loader2 className="animate-spin mr-2" />}
+                          <span>Submit</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                )}
               </div>
 
               <hr className="my-6 md:my-8 border-gray-500" />
@@ -138,17 +211,17 @@ const Detail = () => {
           <div className="flex flex-row sm:-m-4 -mx-4 -mb-10 -mt-4 md:space-y-0 space-y-6">
             <div className="p-4 md:w-1/3 flex hover:bg-MutedSand/75 bg-MutedSand/50 rounded-2xl basis-1/3 mr-4">
               <div className="w-12 h-12 inline-flex items-center justify-center rounded-full bg-AntiqueGold/40 text-AntiqueGold mb-4 flex-shrink-0">
-                <svg
+                {/* <svg
                   fill="none"
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   className="w-6 h-6"
                   viewBox="0 0 24 24"
                 >
                   <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-                </svg>
+                </svg> */}
               </div>
               <div className="flex-grow pl-6">
                 <h2 className="text-gray-900 text-lg title-font font-medium mb-2">
@@ -165,9 +238,9 @@ const Detail = () => {
                   <svg
                     fill="none"
                     stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     className="w-4 h-4 ml-2"
                     viewBox="0 0 24 24"
                   >
@@ -181,9 +254,9 @@ const Detail = () => {
                 <svg
                   fill="none"
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   className="w-6 h-6"
                   viewBox="0 0 24 24"
                 >
@@ -207,9 +280,9 @@ const Detail = () => {
                   <svg
                     fill="none"
                     stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     className="w-4 h-4 ml-2"
                     viewBox="0 0 24 24"
                   >
@@ -223,9 +296,9 @@ const Detail = () => {
                 <svg
                   fill="none"
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   className="w-6 h-6"
                   viewBox="0 0 24 24"
                 >
@@ -248,9 +321,9 @@ const Detail = () => {
                   <svg
                     fill="none"
                     stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     className="w-4 h-4 ml-2"
                     viewBox="0 0 24 24"
                   >

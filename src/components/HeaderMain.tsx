@@ -37,7 +37,7 @@ const HeaderMain = () => {
               <p className="flex justify-between items-center gap-1 font-semibold text-lg">
                 {JSON.parse(user)?.first_name}
                 {(JSON.parse(user)?.isAdmin === true) && (
-                  <p className="font-semibold text-xs">(Admin)</p>
+                  <i className="font-semibold text-xs">(Admin)</i>
                 )}
               </p>
               <button onClick={logout}>

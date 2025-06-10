@@ -90,3 +90,12 @@ export interface IBidPayload {
   product: string;
   bidAmount: number;
 }
+
+export interface IWishlistPayload {
+  email: string;
+  product: string;
+}
+
+export interface IWishlistResponse {
+  message: string;
+}

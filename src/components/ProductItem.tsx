@@ -1,3 +1,4 @@
+import { truncateText } from "@/lib/utils";
 import { IProduct } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
@@ -32,7 +33,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
             {product.title}
           </Link>
           <div className="left-0 top-[60px] absolute text-[#898989] text-sm font-small font-['Poppins'] leading-normal">
-            {product?.description}
+            {truncateText(String(product?.description), 7)}
           </div>
           <div className="h-[30px] left-0 top-[110px] absolute justify-start items-center gap-4 inline-flex">
             <h4 className="text-[#3a3a3a] text-xl font-semibold font-['Poppins'] leading-[30px]">

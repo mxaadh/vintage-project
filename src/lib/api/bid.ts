@@ -1,4 +1,10 @@
-import { IBid, IBidPayload, IBidResponse } from "@/types";
+import {
+  IBid,
+  IBidPayload,
+  IBidResponse,
+  IWishlistPayload,
+  IWishlistResponse,
+} from "@/types";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL;
 
@@ -37,6 +43,35 @@ export async function getBidsByProductId(id: string): Promise<IBidResponse> {
   if (!res.ok) {
     const error = await res.json();
     throw new Error(error.message || "Failed to fetch bids");
+  }
+
+  return res.json();
+}
+
+export async function createWishlist(
+  wishlistData: IWishlistPayload,
+  token: string
+): Promise<IWishlistResponse> {
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  if (token) {
+    myHeaders.append("Authorization", `Bearer ${token}`);
+  }
+
+  const raw = JSON.stringify(wishlistData);
+
+  const requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
+  };
+
+  const res = await fetch(`${API_BASE}/bids/wishlist`, requestOptions);
+
+  if (!res.ok) {
+    const error = await res.json();
+    throw new Error(error.message || "Failed to place bid");
   }
 
   return res.json();

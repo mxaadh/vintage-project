@@ -64,7 +64,7 @@ export default function LoginForm() {
       if (user.isAdmin) {
         router.push("/admin");
       } else {
-        router.back();
+        router.push("/");
       }
     } catch (error: unknown) {
       console.error("Login error:", error);
@@ -125,11 +125,10 @@ export default function LoginForm() {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className={`w-full text-base px-4 py-2 border rounded-lg focus:outline-none ${
-                    errors.email
+                  className={`w-full text-base px-4 py-2 border rounded-lg focus:outline-none ${errors.email
                       ? "border-red-500"
                       : "border-gray-300 focus:border-AntiqueGold"
-                  }`}
+                    }`}
                   placeholder="mail@gmail.com"
                 />
                 {errors.email && (
@@ -147,11 +146,10 @@ export default function LoginForm() {
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
-                  className={`w-full content-center text-base px-4 py-2 border rounded-lg focus:outline-none ${
-                    errors.password
+                  className={`w-full content-center text-base px-4 py-2 border rounded-lg focus:outline-none ${errors.password
                       ? "border-red-500"
                       : "border-gray-300 focus:border-AntiqueGold"
-                  }`}
+                    }`}
                   placeholder="Enter your password"
                 />
                 {errors.password && (
@@ -189,11 +187,10 @@ export default function LoginForm() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className={`w-full flex justify-center ${
-                    loading
+                  className={`w-full flex justify-center ${loading
                       ? "bg-AntiqueGold"
                       : "bg-Terracotta hover:bg-AntiqueGold"
-                  } text-MutedSand p-3 rounded-full tracking-wide font-semibold shadow-lg cursor-pointer transition ease-in duration-500`}
+                    } text-MutedSand p-3 rounded-full tracking-wide font-semibold shadow-lg cursor-pointer transition ease-in duration-500`}
                 >
                   {loading ? "Signing in..." : "Sign in"}
                 </button>

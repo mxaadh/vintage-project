@@ -1,5 +1,6 @@
 "use client";
 
+import CountdownTimer from "@/components/CountdownTimer";
 import BidHistory from "@/components/BidHistory";
 import Button from "@/components/Button";
 import { Input } from "@/components/ui/input";
@@ -9,74 +10,84 @@ import { createBid, getBidsByProductId } from "@/lib/api/bid";
 import { getProductById } from "@/lib/api/product";
 import { IBidResponse, IProduct } from "@/types";
 import Image from "next/image";
-import { redirect, useParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import { useEffect, useState, useCallback } from "react";
 
 const BidItemDetail = () => {
   const { token, user } = useAuth();
-  if (!token) redirect("/login");
+  // if (!token) redirect("/login");
 
   const params = useParams();
   const id = params?._id as string;
+  const [product, setProduct] = useState<IProduct>();
   const [bids, setBids] = useState<IBidResponse>();
   const [currentBid, setCurrentBid] = useState<number>(0);
-  const [product, setProducts] = useState<IProduct>();
+  const [counter, setCounter] = useState<string>("00 : 00 : 00");
   const [formData, setFormData] = useState({
     name: JSON.parse(user)?.first_name || "",
     email: JSON.parse(user)?.email || "",
     product: id || "",
     bidAmount: 0,
-  },)
+  });
 
-  async function fetchProduct() {
+  const fetchProduct = useCallback(async () => {
     try {
       const response: IProduct = await getProductById(id);
-      setProducts(response);
-      setTimeout(() => {
-        console.log(product, "<< product");
+      setProduct(response);
+      setCurrentBid(response?.price || 0)
+      console.log(response, "<< p");
 
-      }, 300)
     } catch (error: unknown) {
       if (error instanceof Error) console.error(error.message);
     }
-  }
+  }, [id]);
 
-  async function fetctBids() {
+  const fetchBids = useCallback(async () => {
     try {
-      const result: IBidResponse = await getBidsByProductId(id)
+      const result: IBidResponse = await getBidsByProductId(id);
       setBids(result);
+
+      if (result?.data?.length > 0) {
+        setCurrentBid(result.data[0].bidAmount);
+      } else if (product?.price) {
+        setCurrentBid(product.price);
+      }
+
+      console.log(result, "<< b");
     } catch (error: unknown) {
       if (error instanceof Error) console.error(error.message);
     }
-  }
+  }, [id, product?.price]);
 
-  async function handleClick() {
+
+  /* if (product?.endDate) {
+    useEffect(() => {
+      const targetTime = new Date(
+        `${product?.endDate}T${endHour.padStart(2, "0")}:${endMinute.padStart(2, "0")}:00`
+      );
+    }, [product, product?.endDate, product?.endHour, product?.endMinute])
+  } */
+
+  useEffect(() => {
+    if (id) {
+      fetchProduct();
+      fetchBids();
+    }
+  }, [id, fetchProduct, fetchBids]);
+
+  const handleClick = async () => {
     if (formData.bidAmount < currentBid) {
-      alert("Bid Amount Must be higher from letest bid.")
+      alert("Bid Amount Must be higher from latest bid.");
       return;
     }
 
     try {
       await createBid(formData, token);
-      fetctBids()
+      fetchBids();
     } catch (error: unknown) {
       if (error instanceof Error) console.error("Error 'on place bid submit'", error.message);
-
     }
-  }
-
-  useEffect(() => {
-    setCurrentBid(product?.price || 0)
-
-    if (bids?.data && bids.data.length > 0) {
-      setCurrentBid(bids.data[0].bidAmount || 0)
-    }
-
-    if (id) {
-      fetchProduct()
-      fetctBids()
-    };
-  }, [id, product, bids]);
+  };
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">
@@ -101,52 +112,70 @@ const BidItemDetail = () => {
                 {product.title}
               </h1>
             )}
-            <p className="text-muted-foreground mt-2 text-lg">
-              Time Remaining{" "}
-              <span className="font-semibold text-xl text-PrimaryGreen">
-                03:12:45
+
+            <br />
+
+            <p className="text-2xl font-extrabold mb-2">
+              Time Remaining
+              <br />
+              <span className="font-extrabold text-2xl text-CoffeeBrown">
+                {product?.endDate && (
+                  <CountdownTimer
+                    endDate={product?.endDate || ""}
+                    endHour={product?.endHour || ""}
+                    endMinute={product?.endMinute || ""}
+                    counter={(x) => setCounter(x)}
+                  />
+                )}
               </span>
             </p>
           </div>
 
           {/* Bid Input */}
-          <div className="space-y-2">
-            <Label htmlFor="bid" className="text-2xl font-extrabold mb-2">
-              Bid Amount
-            </Label>
+          {(counter === "00 : 00 : 00") ? (
+            <h2 className="text-4xl font-extrabold text-red-500">
+              Bidding Time is Over
+            </h2>
+          ) : (
 
-            <div className="flex justify-between">
-              <Input
-                id="bid"
-                className="max-w-lg border-black border-2 height rounded-2xl mr-4 h-15"
-                type="number"
-                min={currentBid}
-                value={formData.bidAmount}
-                onChange={(e) => {
-                  const newBidAmmount = parseFloat(e.target.value)
-                  setFormData({
-                    ...formData,
-                    bidAmount: newBidAmmount,
-                  })
-                }}
-              />
-              <button onClick={handleClick}>
-                <Button name="Place Bid" />
-              </button>
-            </div>
+            <div className="space-y-2">
+              <Label htmlFor="bid" className="text-2xl font-extrabold mb-2">
+                Bid Amount
+              </Label>
 
-            {/* Current Bid */}
-            <div className="text-lg font-semibold">
-              Current Bid: <span className="text-PrimaryGreen">{currentBid}</span>
+              <div className="flex justify-between">
+                <Input
+                  id="bid"
+                  className="max-w-lg border-black border-2 height rounded-2xl mr-4 h-15"
+                  type="number"
+                  min={currentBid}
+                  value={formData.bidAmount}
+                  onChange={(e) => {
+                    const newBidAmmount = parseFloat(e.target.value)
+                    setFormData({
+                      ...formData,
+                      bidAmount: newBidAmmount,
+                    })
+                  }}
+                />
+                <div onClick={handleClick}>
+                  <Button name="Place Bid" />
+                </div>
+              </div>
+
+              {/* Current Bid */}
+              <div className="text-lg font-semibold">
+                Current Bid: <span className="text-PrimaryGreen">{currentBid}</span>
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Bid History */}
           <div>
             <h3 className="text-2xl font-extrabold mb-2">Bid History</h3>
             <ul className="border border-spacing-2 border-DeepMahogany rounded-lg divide-y">
               {(bids?.data && bids.data.length > 0) ? (
-                <BidHistory id={id} />
+                <BidHistory id={id} counter={counter} />
               ) : (
                 <li className="px-4 py-2 flex justify-between text-sm">
                   <span className="font-bold text-lg">No Record Found!</span>
@@ -166,8 +195,8 @@ const BidItemDetail = () => {
             </div>
           )}
         </div>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 };
 

@@ -29,6 +29,7 @@ import {
 } from "@/lib/api/product";
 import { useAuth } from "@/context/AuthContext";
 import { IProductResponse } from "@/types";
+import { truncateText } from "@/lib/utils";
 
 const Product = () => {
   const { token } = useAuth();
@@ -109,7 +110,7 @@ const Product = () => {
                       />
                     )}
                   </TableCell>
-                  <TableCell>{data.description}</TableCell>
+                  <TableCell>{truncateText(String(data?.description), 7)}</TableCell>
                   <TableCell>{data.category}</TableCell>
                   <TableCell>{data.price}</TableCell>
                   <TableCell>
