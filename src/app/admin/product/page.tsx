@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Edit, Plus, Trash } from "lucide-react";
+import { Edit, EyeIcon, Plus, Trash } from "lucide-react";
 import PageHeadingButtons from "@/components/PageheadingButton";
 import SetTimer from "@/components/SetTimer";
 import { Button } from "@/components/ui/button";
@@ -117,11 +117,11 @@ const Product = () => {
                     <SetTimer oldData={data} />
                   </TableCell>
                   <TableCell className="text-right space-x-2">
-                    {/* <Button size={"icon"} variant={"ghost"}>
+                    <Button size={"icon"} variant={"ghost"}>
                       <Link href={`/admin/product/${data._id}`}>
                         <EyeIcon className={"text-green-800"} />
                       </Link>
-                    </Button> */}
+                    </Button>
                     <Button variant="ghost">
                       <Link href={`/admin/product/edit/${data._id}`}>
                         <Edit className={"text-yellow-800"} />

@@ -1,4 +1,9 @@
-import { IProduct, IProductPayload, IProductResponse } from "@/types/";
+import {
+  ICategoryCountersResponse,
+  IProduct,
+  IProductPayload,
+  IProductResponse,
+} from "@/types/";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL;
 
@@ -21,6 +26,17 @@ export async function getAllProducts(
   if (!res.ok) {
     const error = await res.json();
     throw new Error(error.message || "Failed to fetch products");
+  }
+
+  return res.json();
+}
+
+export async function getCategoryCounters(): Promise<ICategoryCountersResponse> {
+  const res = await fetch(`${API_BASE}/products/counters`);
+
+  if (!res.ok) {
+    const error = await res.json();
+    throw new Error(error.message || "Failed to fetch category counters");
   }
 
   return res.json();

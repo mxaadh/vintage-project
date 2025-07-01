@@ -8,10 +8,11 @@ import { Label } from "@/components/ui/label";
 import { useAuth } from "@/context/AuthContext";
 import { createBid, getBidsByProductId } from "@/lib/api/bid";
 import { getProductById } from "@/lib/api/product";
-import { IBidResponse, IProduct } from "@/types";
+import { IBidPayload, IBidResponse, IProduct } from "@/types";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useEffect, useState, useCallback } from "react";
+import Link from "next/link";
 
 const BidItemDetail = () => {
   const { token, user } = useAuth();
@@ -23,7 +24,7 @@ const BidItemDetail = () => {
   const [bids, setBids] = useState<IBidResponse>();
   const [currentBid, setCurrentBid] = useState<number>(0);
   const [counter, setCounter] = useState<string>("00 : 00 : 00");
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<IBidPayload>({
     name: JSON.parse(user)?.first_name || "",
     email: JSON.parse(user)?.email || "",
     product: id || "",
@@ -184,6 +185,17 @@ const BidItemDetail = () => {
               {/* Add more bid entries as needed */}
             </ul>
           </div>
+
+          {/* Checkout && (JSON.parse(user)?.email === bids?.data[0].email) */}
+          {(JSON.parse(user)?.email === bids?.data[0].email) && (
+            <>{(counter === "00 : 00 : 00") && (
+              <Link href={'/checkout/p123'} className="mt-5">
+                <Button name="Checkout" />
+              </Link>
+            )}</>
+          )}
+
+
 
           {/* Description */}
           {product?.description && (

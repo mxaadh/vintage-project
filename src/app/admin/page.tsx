@@ -1,7 +1,11 @@
+import BiddingDashboard from "@/components/BiddingDashboard";
+import CategoryStats from "@/components/CategoryStats";
+
 const Admin = () => {
   return (
     <>
-      <h1>Admin</h1>
+      <BiddingDashboard />
+      <CategoryStats />
     </>
   );
 };

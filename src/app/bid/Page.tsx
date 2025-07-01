@@ -13,9 +13,25 @@ import Image from "next/image";
 import { Slider } from "@/components/ui/slider";
 import Link from "next/link";
 import BannerThree from "@/components/BannersThree";
+import { useEffect, useState } from "react";
+import { IProduct, IProductResponse } from "@/types";
+import { getAllProducts } from "@/lib/api/product";
 
 const BiddingRoom = () => {
-  const items = Array.from({ length: 8 });
+  // const items = Array.from({ length: 8 });
+  const [cproducts, setCProducts] = useState<IProductResponse>();
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const fetchProducts = async () => {
+    const creativeRes: IProductResponse = await getAllProducts({
+      category: "Creative",
+      limit: 8,
+    });
+    setCProducts(creativeRes);
+  };
 
   return (
     <>
@@ -69,27 +85,27 @@ const BiddingRoom = () => {
 
         {/* Grid Items */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {items.map((_, i) => (
+          {cproducts && cproducts.map((product: IProduct, i: string) => (
             <div
               key={i}
               className="border border-Terracotta p-4 rounded-xl space-y-3 bg-MutedSand/60"
             >
               <div className="w-full aspect-square relative rounded overflow-hidden">
                 <Image
-                  src="/assets/images/banner/b11.jpeg"
+                  src={product.image}
                   alt="Item"
                   fill
                   className="object-cover"
                 />
               </div>
               <h3 className="text-xl font-semibold text-CoffeeBrown font-poppins">
-                Item Title
+                {product.title}
               </h3>
               <p className="text-sm text-Terracotta font-poppins">02:34:12</p>
               <p className="text-base font-medium font-poppins text-black">
-                Current Bid
+                {product.price}
               </p>
-              <Link href={"/bid/detail"}>
+              <Link href={`/bid/detail/${product._id}`}>
                 <Button
                   variant="outline"
                   className="w-full border-Terracotta text-Terracotta hover:bg-WarmWhite"
@@ -99,6 +115,114 @@ const BiddingRoom = () => {
               </Link>
             </div>
           ))}
+
+          <div
+            className="border border-Terracotta p-4 rounded-xl space-y-3 bg-MutedSand/60"
+          >
+            <div className="w-full aspect-square relative rounded overflow-hidden">
+              <Image
+                src="/assets/images/creative/c4.jpg"
+                alt="Item"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <h3 className="text-xl font-semibold text-CoffeeBrown font-poppins">
+              Model
+            </h3>
+            <p className="text-sm text-Terracotta font-poppins">02:34:12</p>
+            <p className="text-base font-medium font-poppins text-black">
+              2400
+            </p>
+            <Link href={`/bid/detail/`}>
+              <Button
+                variant="outline"
+                className="w-full border-Terracotta text-Terracotta hover:bg-WarmWhite"
+              >
+                Place Bid
+              </Button>
+            </Link>
+          </div>          <div
+            className="border border-Terracotta p-4 rounded-xl space-y-3 bg-MutedSand/60"
+          >
+            <div className="w-full aspect-square relative rounded overflow-hidden">
+              <Image
+                src="/assets/images/vehicle/v5.jpg"
+                alt="Item"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <h3 className="text-xl font-semibold text-CoffeeBrown font-poppins">
+              Car
+            </h3>
+            <p className="text-sm text-Terracotta font-poppins">02:34:12</p>
+            <p className="text-base font-medium font-poppins text-black">
+              1200
+            </p>
+            <Link href={`/bid/detail/`}>
+              <Button
+                variant="outline"
+                className="w-full border-Terracotta text-Terracotta hover:bg-WarmWhite"
+              >
+                Place Bid
+              </Button>
+            </Link>
+          </div>          <div
+            className="border border-Terracotta p-4 rounded-xl space-y-3 bg-MutedSand/60"
+          >
+            <div className="w-full aspect-square relative rounded overflow-hidden">
+              <Image
+                src="/assets/images/decorative/P010.jpg"
+                alt="Item"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <h3 className="text-xl font-semibold text-CoffeeBrown font-poppins">
+              Vas
+            </h3>
+            <p className="text-sm text-Terracotta font-poppins">02:34:12</p>
+            <p className="text-base font-medium font-poppins text-black">
+              1500
+            </p>
+            <Link href={`/bid/detail/`}>
+              <Button
+                variant="outline"
+                className="w-full border-Terracotta text-Terracotta hover:bg-WarmWhite"
+              >
+                Place Bid
+              </Button>
+            </Link>
+          </div>          <div
+            className="border border-Terracotta p-4 rounded-xl space-y-3 bg-MutedSand/60"
+          >
+            <div className="w-full aspect-square relative rounded overflow-hidden">
+              <Image
+                src="/assets/images/funniture/P010.jpg"
+                alt="Item"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <h3 className="text-xl font-semibold text-CoffeeBrown font-poppins">
+              Sofa
+            </h3>
+            <p className="text-sm text-Terracotta font-poppins">02:34:12</p>
+            <p className="text-base font-medium font-poppins text-black">
+              25000
+            </p>
+            <Link href={`/bid/detail/`}>
+              <Button
+                variant="outline"
+                className="w-full border-Terracotta text-Terracotta hover:bg-WarmWhite"
+              >
+                Place Bid
+              </Button>
+            </Link>
+          </div>
+
+
         </div>
       </section>
     </>
