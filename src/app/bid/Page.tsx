@@ -19,7 +19,7 @@ import { getAllProducts } from "@/lib/api/product";
 
 const BiddingRoom = () => {
   // const items = Array.from({ length: 8 });
-  const [cproducts, setCProducts] = useState<IProductResponse>();
+  const [cproducts, setCProducts] = useState<IProductResponse>() || [];
 
   useEffect(() => {
     fetchProducts();
