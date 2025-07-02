@@ -62,7 +62,7 @@ const CategoryStats: React.FC<CategoryStatsProps> = ({
         };
 
         fetchCategoryStats();
-    }, []);
+    }, [onError]);
 
 
     const getCategoryColor = (index: number): string => {

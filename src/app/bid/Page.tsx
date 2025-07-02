@@ -2,19 +2,19 @@
 
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+// import {
+//   Select,
+//   SelectContent,
+//   SelectItem,
+//   SelectTrigger,
+//   SelectValue,
+// } from "@/components/ui/select";
 import Image from "next/image";
 import { Slider } from "@/components/ui/slider";
 import Link from "next/link";
 import BannerThree from "@/components/BannersThree";
 import { useEffect, useState } from "react";
-import { IProduct, IProductResponse } from "@/types";
+import { IProductResponse } from "@/types";
 import { getAllProducts } from "@/lib/api/product";
 
 const BiddingRoom = () => {
@@ -42,7 +42,7 @@ const BiddingRoom = () => {
         </p>
 
         {/* Filters */}
-        <div className="flex flex-wrap gap-4 justify-center items-center mb-10">
+        {/* <div className="flex flex-wrap gap-4 justify-center items-center mb-10">
           <Select>
             <SelectTrigger className="w-[150px] border-Terracotta text-Terracotta">
               <SelectValue placeholder="Category" />
@@ -73,7 +73,7 @@ const BiddingRoom = () => {
               <SelectItem value="latest">Latest</SelectItem>
             </SelectContent>
           </Select>
-        </div>
+        </div> */}
 
         {/* Slider Filter */}
         <div className="max-w-md mx-auto mb-12">
@@ -85,9 +85,9 @@ const BiddingRoom = () => {
 
         {/* Grid Items */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {cproducts?.data.length > 0 && cproducts.data.map((product: IProduct, i: string) => (
+          {cproducts?.data?.map((product) => (
             <div
-              key={i}
+              key={product._id}
               className="border border-Terracotta p-4 rounded-xl space-y-3 bg-MutedSand/60"
             >
               <div className="w-full aspect-square relative rounded overflow-hidden">
