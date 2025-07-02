@@ -85,7 +85,7 @@ const BiddingRoom = () => {
 
         {/* Grid Items */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {cproducts && cproducts.map((product: IProduct, i: string) => (
+          {cproducts?.data.length > 0 && cproducts.data.map((product: IProduct, i: string) => (
             <div
               key={i}
               className="border border-Terracotta p-4 rounded-xl space-y-3 bg-MutedSand/60"
