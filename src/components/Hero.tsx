@@ -22,7 +22,7 @@ const Hero = () => {
               Explore our exclusive collection of handcrafted vintage pieces,
               carefully curated to bring character and charm into your space.
             </div>
-            <Link href={"/bid"}>
+            <Link href={"/bids"}>
               <div className="h-[74px] px-[72px] py-[25px] left-0 top-[270px] absolute bg-Terracotta border-2 justify-start items-start gap-2.5 inline-flex">
                 <div className="text-WarmWhite text-base font-bold font-['Poppins'] uppercase">
                   BID NOW
